@@ -28,17 +28,18 @@ python3 -m http.server 4173
 
 ## 安装包
 
-网站当前提供以下文件：
+网站下载按钮指向 [VibeMeter v0.1.0 Release](https://github.com/RangeKing/vibemeter/releases/tag/v0.1.0)，当前提供四个下载文件：
 
 ```text
-downloads/VibeMeter-0.1.0-arm64.dmg
-downloads/VibeMeter-0.1.0-arm64.zip
-downloads/SHA256SUMS.txt
+VibeMeter_0.1.0_macOS_aarch64.dmg
+VibeMeter_v0.1.0_macOS_arm64.zip
+VibeMeter_0.1.0_macOS_x64.dmg
+VibeMeter_v0.1.0_macOS_x64.zip
 ```
 
-当前安装包适用于 Apple Silicon 和 macOS 14 及以上版本。构建采用 ad-hoc 签名，尚未完成 Apple 公证；替换为正式签名和公证版本前，网站需要继续明确显示这一状态。
+Apple Silicon 用户选择 `arm64` 或 `aarch64`，Intel Mac 用户选择 `x64`。四个安装包均要求 macOS 14 或更高版本，采用 ad-hoc 签名，尚未完成 Apple 公证。
 
-更新版本时，需要同时修改安装包文件、下载链接、版本号和 SHA-256 校验值。
+更新版本时，需要同时修改 Release 下载链接、版本号、架构说明和签名状态。
 
 ## 网站分析
 

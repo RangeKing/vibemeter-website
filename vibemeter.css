@@ -144,6 +144,132 @@ html[data-language="zh-CN"] .download-panel h2 {
   letter-spacing: 0.02em;
 }
 
+.hero-cta-row {
+  width: 100%;
+  max-width: 42rem;
+}
+
+.release-download-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.release-download-card {
+  display: grid;
+  min-width: 0;
+  gap: 0.75rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+    rgba(8, 8, 10, 0.72);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0.9rem 2rem rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(16px);
+}
+
+.release-download-card-copy {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.release-download-card-copy > span:last-child {
+  display: grid;
+  min-width: 0;
+  gap: 0.1rem;
+}
+
+.release-download-card-copy strong {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.92rem;
+  font-weight: 760;
+  letter-spacing: -0.025em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.release-download-card-copy small {
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 0.72rem;
+  letter-spacing: -0.01em;
+}
+
+.release-arch-badge {
+  display: inline-grid;
+  min-width: 3.25rem;
+  height: 1.75rem;
+  place-items: center;
+  border: 1px solid rgba(255, 149, 99, 0.25);
+  border-radius: 0.55rem;
+  background: rgba(255, 117, 72, 0.1);
+  color: #ff9b63;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.release-download-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.release-download-actions a {
+  display: inline-flex;
+  min-width: 0;
+  min-height: 2.6rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.72rem;
+  font-size: 0.8rem;
+  font-weight: 780;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.release-format-button {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.055);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.release-format-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.release-download-actions .download-glyph {
+  width: 1.15rem;
+  height: 1.15rem;
+  font-size: 0.72rem;
+}
+
+.release-notes-line {
+  margin-top: 0.7rem !important;
+  font-size: 0.78rem !important;
+}
+
+.release-notes-line a,
+.download-panel-links a {
+  color: rgba(255, 255, 255, 0.58);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.release-notes-line a:hover,
+.download-panel-links a:hover {
+  color: #fff;
+}
+
 .vibe-notch {
   position: absolute;
   top: 3.96%;
@@ -637,6 +763,10 @@ html[data-language="zh-CN"] .feature-card h3 {
   color: var(--page-text);
 }
 
+.split-copy-heading .section-title-line {
+  white-space: normal;
+}
+
 .privacy-heading {
   max-width: 58rem;
   color: var(--page-text);
@@ -857,10 +987,10 @@ html[data-language="zh-CN"] .surface-copy h3 {
     0 3rem 8rem rgba(0, 0, 0, 0.25);
 }
 
-@media (min-width: 920px) {
+@media (min-width: 1100px) {
   .download-panel {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: end;
+    grid-template-columns: minmax(0, 0.8fr) minmax(34rem, 1.2fr);
+    align-items: center;
   }
 }
 
@@ -885,6 +1015,20 @@ html[data-language="zh-CN"] .surface-copy h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+}
+
+.download-panel-release {
+  display: grid;
+  min-width: 0;
+  gap: 1rem;
+}
+
+.download-panel-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.8rem 1.2rem;
+  font-size: 0.78rem;
 }
 
 .download-panel-actions .download-button,
@@ -955,6 +1099,18 @@ html[data-language="zh-CN"] .surface-copy h3 {
 }
 
 @media (max-width: 768px) {
+  .release-download-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .release-download-card {
+    padding: 0.8rem;
+  }
+
+  .download-panel-links {
+    justify-content: flex-start;
+  }
+
   html[data-language="zh-CN"] .hero-title-line {
     display: block;
   }

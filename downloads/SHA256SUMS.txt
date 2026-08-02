@@ -1,2 +1,0 @@
-170c4fdfc59f3aeeb47998e88668a08ccfffd9bbc91d75c7af0d45df1fdba70b  VibeMeter-0.1.0-arm64.dmg
-b912d2e08185eab8263ea97e302eb724442a01de1202e4441c4c7a4c28f53102  VibeMeter-0.1.0-arm64.zip
