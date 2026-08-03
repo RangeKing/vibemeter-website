@@ -29,6 +29,16 @@ assert.deepEqual(parseLocalizedNotes(bilingualBody), {
   en: { source: 'localized', markdown: '- Added a release notes section.\n- Fixed download links.' },
 });
 
+const releaseBodyHeadingVariant = `## 中文
+中文版本更新。
+
+## English:
+English release notes.`;
+assert.deepEqual(parseLocalizedNotes(releaseBodyHeadingVariant), {
+  'zh-CN': { source: 'localized', markdown: '中文版本更新。' },
+  en: { source: 'localized', markdown: 'English release notes.' },
+});
+
 assert.deepEqual(selectReleaseAssets(assets), {
   'arm64.dmg': 'https://example.com/aarch64.dmg',
   'arm64.zip': 'https://example.com/arm64.zip',

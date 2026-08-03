@@ -7,18 +7,45 @@ const ASSET_RULES = {
 
 export const releaseAssetKeys = Object.freeze(Object.keys(ASSET_RULES));
 
+const LOCALIZED_HEADING_ALIASES = {
+  'zh-CN': new Set([
+    '中文',
+    '中文说明',
+    '中文更新',
+    '简体中文',
+    '简体中文说明',
+    'chinese',
+    'simplified chinese',
+    'chinese (simplified)',
+  ]),
+  en: new Set([
+    'english',
+    '英文',
+    'english notes',
+    'release notes',
+    'release notes (english)',
+  ]),
+};
+
 function normalizedLines(markdown = '') {
   return String(markdown).replace(/\r\n?/g, '\n').split('\n');
 }
 
-export function extractReleaseSection(markdown, heading) {
+function normalizeHeading(heading) {
+  return String(heading)
+    .trim()
+    .replace(/[：:]+$/, '')
+    .replace(/\s+/g, ' ')
+    .toLocaleLowerCase('en-US');
+}
+
+function extractSection(markdown, matchesHeading) {
   const lines = normalizedLines(markdown);
-  const expected = heading.trim().toLocaleLowerCase('en-US');
   let start = -1;
 
   for (let index = 0; index < lines.length; index += 1) {
     const match = lines[index].match(/^##\s+(.+?)\s*#*\s*$/);
-    if (match?.[1].trim().toLocaleLowerCase('en-US') === expected) {
+    if (match && matchesHeading(match[1])) {
       start = index + 1;
       break;
     }
@@ -35,11 +62,21 @@ export function extractReleaseSection(markdown, heading) {
   return lines.slice(start, end).join('\n').trim();
 }
 
+export function extractReleaseSection(markdown, heading) {
+  const expected = normalizeHeading(heading);
+  return extractSection(markdown, (candidate) => normalizeHeading(candidate) === expected);
+}
+
+function extractLocalizedSection(markdown, locale) {
+  const aliases = LOCALIZED_HEADING_ALIASES[locale];
+  return extractSection(markdown, (candidate) => aliases.has(normalizeHeading(candidate)));
+}
+
 export function parseLocalizedNotes(body = '') {
   const original = String(body).trim();
   const localized = {
-    'zh-CN': extractReleaseSection(original, '简体中文'),
-    en: extractReleaseSection(original, 'English'),
+    'zh-CN': extractLocalizedSection(original, 'zh-CN'),
+    en: extractLocalizedSection(original, 'en'),
   };
 
   return Object.fromEntries(Object.entries(localized).map(([locale, markdown]) => [
