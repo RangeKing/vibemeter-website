@@ -2,15 +2,15 @@
 window.VibeMeterReleaseData = {
   "schemaVersion": 1,
   "sourceRepo": "RangeKing/vibemeter",
-  "version": "v0.1.0",
-  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.0",
-  "publishedAt": "2026-08-01T13:40:07Z",
-  "releaseUpdatedAt": "2026-08-01T14:04:55Z",
+  "version": "v0.1.1",
+  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.1",
+  "publishedAt": "2026-08-03T02:03:27Z",
+  "releaseUpdatedAt": "2026-08-03T02:05:39Z",
   "assets": {
-    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.0/VibeMeter_0.1.0_macOS_aarch64.dmg",
-    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.0/VibeMeter_v0.1.0_macOS_arm64.zip",
-    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.0/VibeMeter_0.1.0_macOS_x64.dmg",
-    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.0/VibeMeter_v0.1.0_macOS_x64.zip"
+    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.1/VibeMeter_0.1.1_macOS_aarch64.dmg",
+    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.1/VibeMeter_v0.1.1_macOS_arm64.zip",
+    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.1/VibeMeter_0.1.1_macOS_x64.dmg",
+    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.1/VibeMeter_v0.1.1_macOS_x64.zip"
   },
   "notes": {
     "zh-CN": {
