@@ -1,0 +1,110 @@
+name: Sync VibeMeter release
+
+on:
+  repository_dispatch:
+    types:
+      - vibemeter-release-published
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Published VibeMeter tag, for example v0.2.0
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-vibemeter-release
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Update, validate, and merge release data
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      RELEASE_TAG: ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.tag || inputs.tag }}
+      RELEASE_BRANCH: automation/vibemeter-release-${{ github.event_name == 'repository_dispatch' && github.event.client_payload.tag || inputs.tag }}
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate requested tag
+        run: |
+          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([+-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Invalid release tag: $RELEASE_TAG"
+            exit 1
+          fi
+
+      - name: Fetch release and generate website data
+        run: node scripts/sync-release.mjs --tag "$RELEASE_TAG"
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check release-data.js
+          node --check site-locales.js
+          node --check site.js
+          node --check scripts/release-sync-lib.mjs
+          node --check scripts/sync-release.mjs
+          node --check scripts/test-release-sync.mjs
+          node --check scripts/validate-site.mjs
+          node --check scripts/verify-release-assets.mjs
+
+      - name: Test release parsing
+        run: node scripts/test-release-sync.mjs
+
+      - name: Validate assets, locales, links, and page bindings
+        run: |
+          node scripts/validate-site.mjs
+          node scripts/verify-release-assets.mjs
+          git diff --check
+
+      - name: Detect release-data changes
+        id: changes
+        run: |
+          if git diff --quiet -- release-data.js; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Website already uses $RELEASE_TAG."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push update branch
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin "$RELEASE_BRANCH" || true
+          git switch -C "$RELEASE_BRANCH"
+          git add release-data.js
+          git commit -m "chore: sync VibeMeter $RELEASE_TAG"
+          git push --force-with-lease origin "HEAD:$RELEASE_BRANCH"
+
+      - name: Create or update release PR
+        if: steps.changes.outputs.changed == 'true'
+        id: pull-request
+        run: |
+          PR_URL="$(gh pr list --head "$RELEASE_BRANCH" --state open --json url --jq '.[0].url')"
+          if [ -z "$PR_URL" ]; then
+            PR_URL="$(gh pr create \
+              --base main \
+              --head "$RELEASE_BRANCH" \
+              --title "chore: sync VibeMeter $RELEASE_TAG" \
+              --body "Updates the website download assets, version, publication date, and release notes from RangeKing/vibemeter@$RELEASE_TAG. The sync workflow verified all four macOS assets, locale parity, page bindings, and JavaScript syntax before opening this PR.")"
+          fi
+          echo "url=$PR_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Enable automatic merge
+        if: steps.changes.outputs.changed == 'true'
+        run: gh pr merge "${{ steps.pull-request.outputs.url }}" --auto --squash --delete-branch

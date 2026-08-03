@@ -87,6 +87,7 @@ body {
 .features-heading,
 .split-copy-heading,
 .privacy-heading,
+.release-section h2,
 .download-panel h2 {
   font-family: var(--display-font);
 }
@@ -103,6 +104,7 @@ html[data-language="zh-CN"] .provider-section h2,
 html[data-language="zh-CN"] .features-heading,
 html[data-language="zh-CN"] .split-copy-heading,
 html[data-language="zh-CN"] .privacy-heading,
+html[data-language="zh-CN"] .release-section h2,
 html[data-language="zh-CN"] .download-panel h2 {
   font-family: "Songti SC", "STSong", var(--display-font);
   font-weight: 700;
@@ -834,6 +836,139 @@ html[data-language="zh-CN"] .privacy-card h3 {
   border-top-color: var(--page-line);
 }
 
+.release-section {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--page-line);
+  border-bottom: 1px solid var(--page-line);
+  background:
+    radial-gradient(circle at 82% 18%, rgba(151, 124, 255, 0.1), transparent 28rem),
+    radial-gradient(circle at 8% 110%, rgba(255, 117, 72, 0.09), transparent 26rem);
+}
+
+.release-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.release-section h2 {
+  max-width: 54rem;
+  margin-top: 0.8rem;
+  color: var(--page-text);
+  font-size: clamp(2.6rem, 5vw, 5.4rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+}
+
+.release-meta {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--page-line);
+  border-radius: 999px;
+  background: var(--control-bg);
+  color: var(--page-subtle);
+  font-size: 0.78rem;
+}
+
+.release-meta strong {
+  color: var(--accent-coral);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.release-meta time:not(:empty)::before {
+  margin-right: 0.75rem;
+  color: var(--page-faint);
+  content: "/";
+}
+
+.release-notes-card {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid var(--page-line);
+  border-radius: clamp(1.25rem, 3vw, 2rem);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--page-bg) 88%, #34233d 12%), color-mix(in srgb, var(--page-bg) 95%, #3d2420 5%));
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.14);
+}
+
+.release-language-fallback {
+  max-width: 52rem;
+  margin-bottom: 1.5rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(255, 197, 95, 0.2);
+  border-radius: 0.8rem;
+  background: rgba(255, 197, 95, 0.06);
+  color: var(--page-muted);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.release-notes-content {
+  max-width: 54rem;
+  color: var(--page-muted);
+  font-size: clamp(1rem, 1.35vw, 1.14rem);
+  line-height: 1.75;
+}
+
+.release-notes-content h3,
+.release-notes-content h4 {
+  margin: 1.6rem 0 0.7rem;
+  color: var(--page-text);
+  font-size: 1.1rem;
+  font-weight: 750;
+}
+
+.release-notes-content :first-child {
+  margin-top: 0;
+}
+
+.release-notes-content p + p,
+.release-notes-content p + ul,
+.release-notes-content p + ol,
+.release-notes-content ul + p,
+.release-notes-content ol + p {
+  margin-top: 0.9rem;
+}
+
+.release-notes-content ul,
+.release-notes-content ol {
+  display: grid;
+  gap: 0.6rem;
+  padding-left: 1.35rem;
+}
+
+.release-notes-content li::marker {
+  color: var(--accent-coral);
+}
+
+.release-notes-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 2rem;
+  color: var(--page-text);
+  font-size: 0.86rem;
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.release-notes-link span:last-child {
+  color: var(--accent-coral);
+  transition: transform 160ms ease;
+}
+
+.release-notes-link:hover span:last-child {
+  transform: translate(0.12rem, -0.12rem);
+}
+
 .download-section {
   position: relative;
 }
@@ -966,6 +1101,7 @@ html[data-language="zh-CN"] .surface-copy h3 {
 
 .surfaces-section.is-revealed .provider-reveal,
 .privacy-section.is-revealed .provider-reveal,
+.release-section.is-revealed .provider-reveal,
 .download-section.is-revealed .provider-reveal {
   opacity: 1;
   transform: translateY(0);
@@ -1099,6 +1235,11 @@ html[data-language="zh-CN"] .surface-copy h3 {
 }
 
 @media (max-width: 768px) {
+  .release-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .release-download-grid {
     grid-template-columns: 1fr;
   }

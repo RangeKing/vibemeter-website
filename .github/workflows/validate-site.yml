@@ -1,0 +1,49 @@
+name: Validate site
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate release data and static site
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check release-data.js
+          node --check site-locales.js
+          node --check site.js
+          node --check scripts/release-sync-lib.mjs
+          node --check scripts/sync-release.mjs
+          node --check scripts/test-release-sync.mjs
+          node --check scripts/validate-site.mjs
+          node --check scripts/verify-release-assets.mjs
+
+      - name: Test release parsing
+        run: node scripts/test-release-sync.mjs
+
+      - name: Validate links, locales, and page bindings
+        run: node scripts/validate-site.mjs
+
+      - name: Verify release assets are downloadable
+        run: node scripts/verify-release-assets.mjs
+
+      - name: Check whitespace errors
+        run: git diff --check

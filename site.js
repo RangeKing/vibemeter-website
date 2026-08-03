@@ -1,4 +1,5 @@
 const { localeCatalog, localeMessages } = window.VibeMeterLocales;
+const releaseData = window.VibeMeterReleaseData;
 
 const root = document.documentElement;
 let activeMessages = localeMessages.en;
@@ -586,6 +587,110 @@ function applyLanguageMessages() {
   updateThemeToggleLabel();
 }
 
+function releaseText(value) {
+  return String(value)
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/(?:\*\*|__)(.+?)(?:\*\*|__)/g, '$1')
+    .replace(/(?:\*|_)(.+?)(?:\*|_)/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .trim();
+}
+
+function renderReleaseMarkdown(container, markdown) {
+  container.replaceChildren();
+  const lines = String(markdown || '').replace(/\r\n?/g, '\n').split('\n');
+  let list;
+  let listType;
+
+  const closeList = () => {
+    list = undefined;
+    listType = undefined;
+  };
+
+  lines.forEach((rawLine) => {
+    const line = rawLine.trim();
+    if (!line) {
+      closeList();
+      return;
+    }
+
+    const heading = line.match(/^(#{1,4})\s+(.+)$/);
+    if (heading) {
+      closeList();
+      const title = document.createElement(heading[1].length <= 2 ? 'h3' : 'h4');
+      title.textContent = releaseText(heading[2]);
+      container.append(title);
+      return;
+    }
+
+    const bullet = line.match(/^[-*+]\s+(.+)$/);
+    const numbered = line.match(/^\d+[.)]\s+(.+)$/);
+    if (bullet || numbered) {
+      const nextListType = numbered ? 'ol' : 'ul';
+      if (!list || listType !== nextListType) {
+        list = document.createElement(nextListType);
+        listType = nextListType;
+        container.append(list);
+      }
+      const item = document.createElement('li');
+      item.textContent = releaseText((bullet || numbered)[1]);
+      list.append(item);
+      return;
+    }
+
+    closeList();
+    const paragraph = document.createElement('p');
+    paragraph.textContent = releaseText(line.replace(/^>\s?/, ''));
+    container.append(paragraph);
+  });
+
+  if (!container.childElementCount) {
+    const empty = document.createElement('p');
+    empty.textContent = message('release.empty');
+    container.append(empty);
+  }
+}
+
+function renderReleaseData() {
+  if (!releaseData) return;
+
+  document.querySelectorAll('[data-release-asset]').forEach((link) => {
+    const url = releaseData.assets?.[link.dataset.releaseAsset];
+    if (url) link.href = url;
+  });
+  document.querySelectorAll('[data-release-url]').forEach((link) => {
+    link.href = releaseData.releaseUrl;
+  });
+  document.querySelectorAll('[data-release-version]').forEach((element) => {
+    element.textContent = releaseData.version;
+  });
+
+  const publishedDate = new Date(releaseData.publishedAt);
+  const formattedDate = Number.isNaN(publishedDate.getTime())
+    ? ''
+    : new Intl.DateTimeFormat(activeLanguage, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      timeZone: 'UTC',
+    }).format(publishedDate);
+  document.querySelectorAll('[data-release-date]').forEach((element) => {
+    element.dateTime = releaseData.publishedAt;
+    element.textContent = formattedDate;
+  });
+
+  const note = releaseData.notes?.[activeLanguage] || releaseData.notes?.en || { source: 'fallback', markdown: '' };
+  const fallback = document.querySelector('[data-release-fallback]');
+  if (fallback) {
+    fallback.hidden = note.source !== 'fallback';
+    fallback.textContent = note.source === 'fallback' ? message('release.fallback') : '';
+  }
+  document.querySelectorAll('[data-release-notes]').forEach((container) => {
+    renderReleaseMarkdown(container, note.markdown);
+  });
+}
+
 function renderLanguageMenu() {
   languageList.replaceChildren();
   languages.forEach((language) => {
@@ -612,6 +717,7 @@ function updateLanguageUi() {
   languageShort.textContent = current.short;
   root.dataset.language = current.id;
   applyLanguageMessages();
+  renderReleaseData();
   syncNotchDemoLabels();
   languageList.querySelectorAll('[role="option"]').forEach((option) => {
     const selected = option.dataset.lang === activeLanguage;

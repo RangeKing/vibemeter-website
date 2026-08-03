@@ -175,8 +175,8 @@
                       <span><strong data-i18n="download.appleSilicon">Apple Silicon</strong><small data-i18n="download.appleSiliconDetail">M-series Mac</small></span>
                     </div>
                     <div class="release-download-actions">
-                      <a href="https://github.com/RangeKing/vibemeter/releases/download/v0.1.0/VibeMeter_0.1.0_macOS_aarch64.dmg" class="download-button hero-download button-press" download data-i18n-aria-label="download.appleDmgAria"><img src="./images/apple.svg" alt="" class="apple-icon" /><span data-i18n="download.dmg">DMG</span></a>
-                      <a href="https://github.com/RangeKing/vibemeter/releases/download/v0.1.0/VibeMeter_v0.1.0_macOS_arm64.zip" class="button-press release-format-button" download data-i18n-aria-label="download.appleZipAria"><span class="download-glyph" aria-hidden="true">↓</span><span data-i18n="download.zip">ZIP</span></a>
+                      <a href="https://github.com/RangeKing/vibemeter/releases/latest" class="download-button hero-download button-press" download data-release-asset="arm64.dmg" data-i18n-aria-label="download.appleDmgAria"><img src="./images/apple.svg" alt="" class="apple-icon" /><span data-i18n="download.dmg">DMG</span></a>
+                      <a href="https://github.com/RangeKing/vibemeter/releases/latest" class="button-press release-format-button" download data-release-asset="arm64.zip" data-i18n-aria-label="download.appleZipAria"><span class="download-glyph" aria-hidden="true">↓</span><span data-i18n="download.zip">ZIP</span></a>
                     </div>
                   </div>
                   <div class="release-download-card">
@@ -185,8 +185,8 @@
                       <span><strong data-i18n="download.intel">Intel Mac</strong><small data-i18n="download.intelDetail">Intel processor</small></span>
                     </div>
                     <div class="release-download-actions">
-                      <a href="https://github.com/RangeKing/vibemeter/releases/download/v0.1.0/VibeMeter_0.1.0_macOS_x64.dmg" class="download-button hero-download button-press" download data-i18n-aria-label="download.intelDmgAria"><img src="./images/apple.svg" alt="" class="apple-icon" /><span data-i18n="download.dmg">DMG</span></a>
-                      <a href="https://github.com/RangeKing/vibemeter/releases/download/v0.1.0/VibeMeter_v0.1.0_macOS_x64.zip" class="button-press release-format-button" download data-i18n-aria-label="download.intelZipAria"><span class="download-glyph" aria-hidden="true">↓</span><span data-i18n="download.zip">ZIP</span></a>
+                      <a href="https://github.com/RangeKing/vibemeter/releases/latest" class="download-button hero-download button-press" download data-release-asset="x64.dmg" data-i18n-aria-label="download.intelDmgAria"><img src="./images/apple.svg" alt="" class="apple-icon" /><span data-i18n="download.dmg">DMG</span></a>
+                      <a href="https://github.com/RangeKing/vibemeter/releases/latest" class="button-press release-format-button" download data-release-asset="x64.zip" data-i18n-aria-label="download.intelZipAria"><span class="download-glyph" aria-hidden="true">↓</span><span data-i18n="download.zip">ZIP</span></a>
                     </div>
                   </div>
                 </div>
@@ -194,7 +194,7 @@
               <p class="reveal reveal-5 mt-5 text-sm tracking-[-0.02em] text-zinc-600" data-i18n="hero.fineprint">
                 Free &amp; open source · Apple Silicon + Intel · macOS 14+ · ad-hoc signed · not notarized
               </p>
-              <p class="release-notes-line reveal reveal-5"><a href="https://github.com/RangeKing/vibemeter/releases/tag/v0.1.0" data-i18n="download.releaseNotes">View v0.1.0 release notes</a> ↗</p>
+              <p class="release-notes-line reveal reveal-5"><a href="https://github.com/RangeKing/vibemeter/releases/latest" data-release-url data-i18n="download.releaseNotes">View full release notes</a> ↗</p>
             </div>
           </div>
         </div>
@@ -352,9 +352,32 @@
           <p class="section-eyebrow provider-reveal" data-i18n="detail.more">Before you download</p>
           <div class="technical-grid mt-8">
             <article class="technical-block provider-reveal" style="--reveal-delay: 60ms"><h3 data-i18n="detail.installTitle">Install from the DMG</h3><p data-i18n="detail.installBody">Choose the build for your Mac, then open the DMG and drag VibeMeter into Applications. ZIP builds are also available.</p></article>
-            <article class="technical-block provider-reveal" style="--reveal-delay: 110ms"><h3 data-i18n="detail.betaTitle">System requirements for v0.1.0</h3><p data-i18n="detail.betaBody">VibeMeter 0.1.0 supports Apple Silicon and Intel Macs running macOS 14 or later. Both builds are ad-hoc signed and not Apple-notarized.</p></article>
+            <article class="technical-block provider-reveal" style="--reveal-delay: 110ms"><h3 data-i18n="detail.betaTitle">System requirements</h3><p data-i18n="detail.betaBody">VibeMeter supports Apple Silicon and Intel Macs running macOS 14 or later. Both builds are ad-hoc signed and not Apple-notarized.</p></article>
             <article class="technical-block provider-reveal" style="--reveal-delay: 160ms"><h3 data-i18n="detail.permissionsTitle">You choose whether to install Hooks</h3><p data-i18n="detail.permissionsBody">VibeMeter installs live hooks only after explicit onboarding consent. Existing configuration is merged, backed up, and removable from Settings.</p></article>
             <article class="technical-block provider-reveal" style="--reveal-delay: 210ms"><h3 data-i18n="detail.sourceTitle">MIT licensed</h3><p><span data-i18n="detail.sourceBody">VibeMeter is MIT licensed. Source code and releases are available on GitHub.</span> <a class="text-link" href="https://github.com/RangeKing/vibemeter">GitHub</a>.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="release-section px-5 py-20 sm:px-8 lg:px-12 lg:py-28" id="release-notes" data-scroll-section>
+        <div class="section-inner">
+          <div class="release-section-heading provider-reveal">
+            <div>
+              <p class="section-eyebrow" data-i18n="release.eyebrow">Latest release</p>
+              <h2 data-i18n="release.title">What’s new in VibeMeter</h2>
+            </div>
+            <div class="release-meta" aria-label="Latest release version and date" data-i18n-aria-label="release.metaAria">
+              <strong data-release-version>Latest</strong>
+              <time data-release-date></time>
+            </div>
+          </div>
+          <div class="release-notes-card provider-reveal" style="--reveal-delay: 80ms">
+            <p class="release-language-fallback" data-release-fallback hidden></p>
+            <div class="release-notes-content" data-release-notes aria-live="polite"></div>
+            <a class="release-notes-link" href="https://github.com/RangeKing/vibemeter/releases/latest" data-release-url>
+              <span data-i18n="release.fullNotes">View the complete release on GitHub</span>
+              <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
       </section>
@@ -372,21 +395,21 @@
                 <div class="release-download-card">
                   <div class="release-download-card-copy"><span class="release-arch-badge">ARM64</span><span><strong data-i18n="download.appleSilicon">Apple Silicon</strong><small data-i18n="download.appleSiliconDetail">M-series Mac</small></span></div>
                   <div class="release-download-actions">
-                    <a href="https://github.com/RangeKing/vibemeter/releases/download/v0.1.0/VibeMeter_0.1.0_macOS_aarch64.dmg" class="download-button button-press" download data-i18n-aria-label="download.appleDmgAria"><img src="./images/apple.svg" alt="" class="apple-icon" /><span data-i18n="download.dmg">DMG</span></a>
-                    <a href="https://github.com/RangeKing/vibemeter/releases/download/v0.1.0/VibeMeter_v0.1.0_macOS_arm64.zip" class="button-press release-format-button" download data-i18n-aria-label="download.appleZipAria"><span class="download-glyph" aria-hidden="true">↓</span><span data-i18n="download.zip">ZIP</span></a>
+                    <a href="https://github.com/RangeKing/vibemeter/releases/latest" class="download-button button-press" download data-release-asset="arm64.dmg" data-i18n-aria-label="download.appleDmgAria"><img src="./images/apple.svg" alt="" class="apple-icon" /><span data-i18n="download.dmg">DMG</span></a>
+                    <a href="https://github.com/RangeKing/vibemeter/releases/latest" class="button-press release-format-button" download data-release-asset="arm64.zip" data-i18n-aria-label="download.appleZipAria"><span class="download-glyph" aria-hidden="true">↓</span><span data-i18n="download.zip">ZIP</span></a>
                   </div>
                 </div>
                 <div class="release-download-card">
                   <div class="release-download-card-copy"><span class="release-arch-badge">X64</span><span><strong data-i18n="download.intel">Intel Mac</strong><small data-i18n="download.intelDetail">Intel processor</small></span></div>
                   <div class="release-download-actions">
-                    <a href="https://github.com/RangeKing/vibemeter/releases/download/v0.1.0/VibeMeter_0.1.0_macOS_x64.dmg" class="download-button button-press" download data-i18n-aria-label="download.intelDmgAria"><img src="./images/apple.svg" alt="" class="apple-icon" /><span data-i18n="download.dmg">DMG</span></a>
-                    <a href="https://github.com/RangeKing/vibemeter/releases/download/v0.1.0/VibeMeter_v0.1.0_macOS_x64.zip" class="button-press release-format-button" download data-i18n-aria-label="download.intelZipAria"><span class="download-glyph" aria-hidden="true">↓</span><span data-i18n="download.zip">ZIP</span></a>
+                    <a href="https://github.com/RangeKing/vibemeter/releases/latest" class="download-button button-press" download data-release-asset="x64.dmg" data-i18n-aria-label="download.intelDmgAria"><img src="./images/apple.svg" alt="" class="apple-icon" /><span data-i18n="download.dmg">DMG</span></a>
+                    <a href="https://github.com/RangeKing/vibemeter/releases/latest" class="button-press release-format-button" download data-release-asset="x64.zip" data-i18n-aria-label="download.intelZipAria"><span class="download-glyph" aria-hidden="true">↓</span><span data-i18n="download.zip">ZIP</span></a>
                   </div>
                 </div>
               </div>
               <div class="download-panel-links">
                 <a href="https://github.com/RangeKing/vibemeter" data-i18n="download.github">GitHub source</a>
-                <a href="https://github.com/RangeKing/vibemeter/releases/tag/v0.1.0" data-i18n="download.releaseNotes">View v0.1.0 release notes</a>
+                <a href="https://github.com/RangeKing/vibemeter/releases/latest" data-release-url data-i18n="download.releaseNotes">View full release notes</a>
               </div>
             </div>
           </div>
@@ -401,7 +424,8 @@
       </div>
     </footer>
 
-    <script defer src="./site-locales.js?v=7"></script>
-    <script defer src="./site.js?v=8"></script>
+    <script defer src="./release-data.js?v=1"></script>
+    <script defer src="./site-locales.js?v=8"></script>
+    <script defer src="./site.js?v=9"></script>
   </body>
 </html>

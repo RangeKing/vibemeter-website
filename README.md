@@ -26,20 +26,50 @@ python3 -m http.server 4173
 
 然后打开 `http://127.0.0.1:4173/`。
 
-## 安装包
+## 安装包与版本说明
 
-网站下载按钮指向 [VibeMeter v0.1.0 Release](https://github.com/RangeKing/vibemeter/releases/tag/v0.1.0)，当前提供四个下载文件：
+网站从 `release-data.js` 读取最新版本号、发布日期、Release 地址、四个安装包地址和中英文更新内容。`index.html` 只声明 `arm64.dmg`、`arm64.zip`、`x64.dmg` 和 `x64.zip` 四类资源，不重复写死版本号或文件名，因此直接用 `file://` 打开时也能正常下载。
 
-```text
-VibeMeter_0.1.0_macOS_aarch64.dmg
-VibeMeter_v0.1.0_macOS_arm64.zip
-VibeMeter_0.1.0_macOS_x64.dmg
-VibeMeter_v0.1.0_macOS_x64.zip
+Apple Silicon 用户选择 ARM64，Intel Mac 用户选择 x64。DMG 适合常规安装，ZIP 可用于直接解压。
+
+如需手动同步某个已发布版本，可运行：
+
+```sh
+node scripts/sync-release.mjs --tag vX.Y.Z
+node scripts/test-release-sync.mjs
+node scripts/validate-site.mjs
+node scripts/verify-release-assets.mjs
 ```
 
-Apple Silicon 用户选择 `arm64` 或 `aarch64`，Intel Mac 用户选择 `x64`。四个安装包均要求 macOS 14 或更高版本，采用 ad-hoc 签名，尚未完成 Apple 公证。
+同步脚本会先确认四个附件齐全，再覆盖 `release-data.js`。缺少任意附件、链接不合法、语言键不一致或页面没有绑定四类资源时，校验会直接失败。
 
-更新版本时，需要同时修改 Release 下载链接、版本号、架构说明和签名状态。
+## 自动同步流程
+
+主仓库完成 Apple Silicon 与 Intel 构建并上传四个附件后，`release.yml` 使用 `repository_dispatch` 通知本仓库。`sync-release.yml` 随后完成以下工作：
+
+1. 获取指定 GitHub Release，并确认 ARM64/x64 的 DMG 和 ZIP 均已上传；
+2. 生成 `release-data.js`，提取版本号、发布日期、下载地址和更新内容；
+3. 校验 JavaScript、双语键、下载链接和页面绑定；
+4. 创建版本同步 PR，并在仓库要求的检查通过后自动 squash 合并。
+
+需要完成两项仓库设置：
+
+- 在 `RangeKing/vibemeter` 中添加 Actions Secret `WEBSITE_DISPATCH_TOKEN`。建议使用只授权 `RangeKing/vibemeter-website` 的细粒度 Token，并授予 `Contents: write`。
+- 在 `RangeKing/vibemeter-website` 的 Actions 设置中启用读写权限、允许 Actions 创建 Pull Request，并开启仓库自动合并。
+
+Release 正文推荐使用下面的双语结构：
+
+```md
+## 简体中文
+- 新增……
+- 修复……
+
+## English
+- Added…
+- Fixed…
+```
+
+同步脚本只提取 Release 中实际存在的段落。缺少某种语言时，网页显示原始 Release 内容和完整发布说明链接，不自动翻译或补写。
 
 ## 网站分析
 
