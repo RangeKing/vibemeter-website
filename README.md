@@ -50,12 +50,12 @@ node scripts/verify-release-assets.mjs
 1. 获取指定 GitHub Release，并确认 ARM64/x64 的 DMG 和 ZIP 均已上传；
 2. 生成 `release-data.js`，提取版本号、发布日期、下载地址和更新内容；
 3. 校验 JavaScript、双语键、下载链接和页面绑定；
-4. 创建版本同步 PR，并在仓库要求的检查通过后自动 squash 合并。
+4. 创建版本同步 PR，并在仓库允许时启用自动 squash 合并；如果仓库未开启自动合并，工作流会在自身校验全部通过后直接 squash 合并。
 
 需要完成两项仓库设置：
 
 - 在 `RangeKing/vibemeter` 中添加 Actions Secret `WEBSITE_DISPATCH_TOKEN`。建议使用只授权 `RangeKing/vibemeter-website` 的细粒度 Token，并授予 `Contents: write`。
-- 在 `RangeKing/vibemeter-website` 的 Actions 设置中启用读写权限、允许 Actions 创建 Pull Request，并开启仓库自动合并。
+- 在 `RangeKing/vibemeter-website` 的 Actions 设置中启用读写权限、允许 Actions 创建 Pull Request。建议开启仓库自动合并；未开启时，工作流会使用已完成校验的同步 PR 直接合并。
 
 Release 正文推荐使用下面的双语结构：
 
