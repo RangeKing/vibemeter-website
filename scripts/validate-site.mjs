@@ -36,6 +36,13 @@ for (const locale of ['en', 'zh-CN']) {
 }
 
 assert.ok(indexHtml.includes('release-data.js'), 'index.html must load release-data.js.');
+const releaseScriptVersion = indexHtml.match(/<script\s+defer\s+src=["']\.\/release-data\.js\?v=([^"']+)["']/)?.[1];
+assert.ok(releaseScriptVersion, 'release-data.js must include a version query parameter.');
+assert.equal(
+  decodeURIComponent(releaseScriptVersion),
+  releaseData.version,
+  'release-data.js cache key must match the current release version.',
+);
 assert.doesNotMatch(indexHtml, /releases\/download\//, 'Download URLs must not be hardcoded in index.html.');
 assert.doesNotMatch(indexHtml, /releases\/tag\/v\d+\.\d+\.\d+/, 'Versioned release URLs must not be hardcoded in index.html.');
 

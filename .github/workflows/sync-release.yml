@@ -73,7 +73,7 @@ jobs:
       - name: Detect release-data changes
         id: changes
         run: |
-          if git diff --quiet -- release-data.js; then
+          if git diff --quiet -- release-data.js index.html; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "Website already uses $RELEASE_TAG."
           else
@@ -87,7 +87,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin "$RELEASE_BRANCH" || true
           git switch -C "$RELEASE_BRANCH"
-          git add release-data.js
+          git add release-data.js index.html
           git commit -m "chore: sync VibeMeter $RELEASE_TAG"
           git push --force-with-lease origin "HEAD:$RELEASE_BRANCH"
 

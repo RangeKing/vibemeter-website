@@ -28,7 +28,7 @@ python3 -m http.server 4173
 
 ## 安装包与版本说明
 
-网站从 `release-data.js` 读取最新版本号、发布日期、Release 地址、四个安装包地址和中英文更新内容。`index.html` 只声明 `arm64.dmg`、`arm64.zip`、`x64.dmg` 和 `x64.zip` 四类资源，不重复写死版本号或文件名，因此直接用 `file://` 打开时也能正常下载。
+网站从 `release-data.js` 读取最新版本号、发布日期、Release 地址、四个安装包地址和中英文更新内容。同步脚本会把 `release-data.js` 的缓存键更新为当前 Release 版本，避免 GitHub Pages 发布后继续使用旧的浏览器缓存。`index.html` 只声明 `arm64.dmg`、`arm64.zip`、`x64.dmg` 和 `x64.zip` 四类资源，不重复写死版本号或文件名，因此直接用 `file://` 打开时也能正常下载。
 
 Apple Silicon 用户选择 ARM64，Intel Mac 用户选择 x64。DMG 适合常规安装，ZIP 可用于直接解压。
 

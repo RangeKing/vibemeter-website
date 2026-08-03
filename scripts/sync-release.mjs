@@ -1,6 +1,10 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { buildReleaseData, serializeReleaseData } from './release-sync-lib.mjs';
+import {
+  buildReleaseData,
+  serializeReleaseData,
+  updateReleaseScriptVersion,
+} from './release-sync-lib.mjs';
 
 function parseArguments(values) {
   const options = {
@@ -48,4 +52,14 @@ const outputPath = resolve(options.output);
 
 await mkdir(dirname(outputPath), { recursive: true });
 await writeFile(outputPath, serializeReleaseData(data), 'utf8');
+
+if (outputPath === resolve('release-data.js')) {
+  const indexPath = resolve('index.html');
+  const indexSource = await readFile(indexPath, 'utf8');
+  const updatedIndex = updateReleaseScriptVersion(indexSource, data.version);
+  if (updatedIndex !== indexSource) {
+    await writeFile(indexPath, updatedIndex, 'utf8');
+  }
+}
+
 console.log(`Synced ${data.version}: ${Object.keys(data.assets).length} assets, ${outputPath}`);

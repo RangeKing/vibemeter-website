@@ -91,3 +91,11 @@ export function buildReleaseData(release, sourceRepo = 'RangeKing/vibemeter') {
 export function serializeReleaseData(data) {
   return `// Generated from ${data.sourceRepo}. Do not edit by hand.\nwindow.VibeMeterReleaseData = ${JSON.stringify(data, null, 2)};\n`;
 }
+
+export function updateReleaseScriptVersion(indexHtml, version) {
+  const scriptPattern = /(<script\s+defer\s+src=["']\.\/release-data\.js\?v=)[^"']*(["'])/;
+  if (!scriptPattern.test(indexHtml)) {
+    throw new Error('index.html must load release-data.js with a version query parameter.');
+  }
+  return indexHtml.replace(scriptPattern, `$1${encodeURIComponent(version)}$2`);
+}

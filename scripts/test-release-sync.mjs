@@ -4,6 +4,7 @@ import {
   extractReleaseSection,
   parseLocalizedNotes,
   selectReleaseAssets,
+  updateReleaseScriptVersion,
 } from './release-sync-lib.mjs';
 
 const assets = [
@@ -55,5 +56,14 @@ assert.deepEqual(parseLocalizedNotes(originalOnly), {
 
 assert.throws(() => selectReleaseAssets(assets.slice(1)), /exactly one arm64\.dmg/);
 assert.throws(() => selectReleaseAssets([...assets, assets[0]]), /found 2/);
+
+assert.equal(
+  updateReleaseScriptVersion('<script defer src="./release-data.js?v=1"></script>', 'v0.2.0'),
+  '<script defer src="./release-data.js?v=v0.2.0"></script>',
+);
+assert.throws(
+  () => updateReleaseScriptVersion('<script defer src="./site.js?v=1"></script>', 'v0.2.0'),
+  /must load release-data\.js/,
+);
 
 console.log('Release sync tests passed.');
