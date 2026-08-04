@@ -28,7 +28,7 @@ python3 -m http.server 4173
 
 ## 安装包与版本说明
 
-网站从 `release-data.js` 读取最新版本号、发布日期、Release 地址、四个安装包地址和中英文更新内容。同步脚本会把 `release-data.js` 的缓存键更新为当前 Release 版本，避免 GitHub Pages 发布后继续使用旧的浏览器缓存。`index.html` 只声明 `arm64.dmg`、`arm64.zip`、`x64.dmg` 和 `x64.zip` 四类资源，不重复写死版本号或文件名，因此直接用 `file://` 打开时也能正常下载。
+网站从 `release-data.js` 读取最新版本号、发布日期、Release 地址、四个安装包地址，以及按版本倒序排列的中英文更新日志。同步脚本会把 `release-data.js` 的缓存键更新为当前 Release 的修订时间和数据 schema 版本，避免 GitHub Pages 发布后继续使用旧的浏览器缓存。`index.html` 只声明 `arm64.dmg`、`arm64.zip`、`x64.dmg` 和 `x64.zip` 四类资源，不重复写死版本号或文件名，因此直接用 `file://` 打开时也能正常下载。
 
 Apple Silicon 用户选择 ARM64，Intel Mac 用户选择 x64。DMG 适合常规安装，ZIP 可用于直接解压。
 
@@ -47,8 +47,8 @@ node scripts/verify-release-assets.mjs
 
 主仓库完成 Apple Silicon 与 Intel 构建并上传四个附件后，`release.yml` 使用 `repository_dispatch` 通知本仓库。`sync-release.yml` 随后完成以下工作：
 
-1. 获取指定 GitHub Release，并确认 ARM64/x64 的 DMG 和 ZIP 均已上传；
-2. 生成 `release-data.js`，提取版本号、发布日期、下载地址和更新内容；
+1. 获取指定 GitHub Release 及公开 Release 历史，并确认 ARM64/x64 的 DMG 和 ZIP 均已上传；
+2. 生成 `release-data.js`，提取版本号、发布日期、下载地址和全部更新日志；
 3. 校验 JavaScript、双语键、下载链接和页面绑定；
 4. 创建版本同步 PR，并在仓库允许时启用自动 squash 合并；如果仓库未开启自动合并，工作流会在自身校验全部通过后直接 squash 合并。
 
@@ -57,7 +57,7 @@ node scripts/verify-release-assets.mjs
 - 在 `RangeKing/vibemeter` 中添加 Actions Secret `WEBSITE_DISPATCH_TOKEN`。建议使用只授权 `RangeKing/vibemeter-website` 的细粒度 Token，并授予 `Contents: write`。
 - 在 `RangeKing/vibemeter-website` 的 Actions 设置中启用读写权限、允许 Actions 创建 Pull Request。建议开启仓库自动合并；未开启时，工作流会使用已完成校验的同步 PR 直接合并。
 
-Release 正文推荐使用下面的双语结构：
+Release 正文可以使用下面的双语结构：
 
 ```md
 ## 简体中文
@@ -69,7 +69,7 @@ Release 正文推荐使用下面的双语结构：
 - Fixed…
 ```
 
-同步脚本会按二级标题自动切分实际存在的语言段落，兼容 `中文`、`简体中文`、`Chinese`、`English` 和 `英文` 等常见标题写法。缺少某种语言时，网页显示原始 Release 内容和完整发布说明链接，不自动翻译或补写。
+同步脚本优先按语言标题切分，也会在没有标题时根据中英文段落自动切分；兼容 `中文`、`简体中文`、`Chinese`、`English` 和 `英文` 等常见标题写法。缺少某种语言时，网页显示原始 Release 内容和完整发布说明链接，不自动翻译或补写。
 
 ## 网站分析
 

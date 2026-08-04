@@ -1,8 +1,11 @@
 import assert from 'node:assert/strict';
 import {
+  buildReleaseCollection,
   buildReleaseData,
+  buildReleaseHistory,
   extractReleaseSection,
   parseLocalizedNotes,
+  releaseDataCacheKey,
   selectReleaseAssets,
   updateReleaseScriptVersion,
 } from './release-sync-lib.mjs';
@@ -39,6 +42,27 @@ assert.deepEqual(parseLocalizedNotes(releaseBodyHeadingVariant), {
   en: { source: 'localized', markdown: 'English release notes.' },
 });
 
+const releaseBodyFormatVariant = `### 🇨🇳 中文（简体）
+- 修复中文说明识别。
+
+### 🇺🇸 English
+- Detect localized release notes reliably.`;
+assert.deepEqual(parseLocalizedNotes(releaseBodyFormatVariant), {
+  'zh-CN': { source: 'localized', markdown: '- 修复中文说明识别。' },
+  en: { source: 'localized', markdown: '- Detect localized release notes reliably.' },
+});
+
+const unheadedBilingualBody = `版本更新说明：修复数据页空会话噪声。
+- 保留原始会话台账。
+
+Version notes: remove empty work-event noise from Data.
+- Keep the raw session ledger available.
+- Frontend: 55 tests passed.`;
+assert.deepEqual(parseLocalizedNotes(unheadedBilingualBody), {
+  'zh-CN': { source: 'localized', markdown: '版本更新说明：修复数据页空会话噪声。\n- 保留原始会话台账。' },
+  en: { source: 'localized', markdown: 'Version notes: remove empty work-event noise from Data.\n- Keep the raw session ledger available.\n- Frontend: 55 tests passed.' },
+});
+
 assert.deepEqual(selectReleaseAssets(assets), {
   'arm64.dmg': 'https://example.com/aarch64.dmg',
   'arm64.zip': 'https://example.com/arm64.zip',
@@ -46,7 +70,7 @@ assert.deepEqual(selectReleaseAssets(assets), {
   'x64.zip': 'https://example.com/x64.zip',
 });
 
-const release = buildReleaseData({
+const releasePayload = {
   tag_name: 'v0.2.0',
   html_url: 'https://github.com/RangeKing/vibemeter/releases/tag/v0.2.0',
   published_at: '2026-08-02T00:00:00Z',
@@ -54,9 +78,37 @@ const release = buildReleaseData({
   draft: false,
   body: bilingualBody,
   assets,
-});
+};
+const release = buildReleaseData(releasePayload);
 assert.equal(release.version, 'v0.2.0');
 assert.equal(release.notes['zh-CN'].source, 'localized');
+
+const betaRelease = {
+  tag_name: 'v0.1.0',
+  html_url: 'https://github.com/RangeKing/vibemeter/releases/tag/v0.1.0',
+  published_at: '2026-07-01T00:00:00Z',
+  updated_at: '2026-07-01T00:05:00Z',
+  draft: false,
+  body: '',
+  assets,
+};
+const betaData = buildReleaseData(betaRelease);
+assert.deepEqual(betaData.notes, {
+  'zh-CN': { source: 'default', markdown: '测试版正式发布' },
+  en: { source: 'default', markdown: 'First public beta release.' },
+});
+
+const history = buildReleaseHistory([betaRelease, {
+  ...releasePayload,
+  tag_name: 'v0.2.0',
+  published_at: '2026-08-02T00:00:00Z',
+}]);
+assert.deepEqual(history.map((entry) => entry.version), ['v0.2.0', 'v0.1.0']);
+assert.ok(!('assets' in history[0]));
+
+const collection = buildReleaseCollection(releasePayload, [betaRelease], 'RangeKing/vibemeter');
+assert.deepEqual(collection.releases.map((entry) => entry.version), ['v0.2.0', 'v0.1.0']);
+assert.equal(collection.schemaVersion, 2);
 
 const originalOnly = 'A release body without localized headings.';
 assert.deepEqual(parseLocalizedNotes(originalOnly), {
@@ -70,6 +122,22 @@ assert.throws(() => selectReleaseAssets([...assets, assets[0]]), /found 2/);
 assert.equal(
   updateReleaseScriptVersion('<script defer src="./release-data.js?v=1"></script>', 'v0.2.0'),
   '<script defer src="./release-data.js?v=v0.2.0"></script>',
+);
+assert.equal(
+  releaseDataCacheKey({ version: 'v0.2.0', releaseUpdatedAt: '2026-08-02T00:05:00Z' }),
+  'v0.2.0-20260802000500',
+);
+assert.equal(
+  releaseDataCacheKey({ version: 'v0.2.0', releaseUpdatedAt: '2026-08-02T00:05:00Z', schemaVersion: 2 }),
+  'v0.2.0-20260802000500-s2',
+);
+assert.equal(
+  updateReleaseScriptVersion(
+    '<script defer src="./release-data.js?v=old"></script>',
+    'v0.2.0',
+    'v0.2.0-20260802000500',
+  ),
+  '<script defer src="./release-data.js?v=v0.2.0-20260802000500"></script>',
 );
 assert.throws(
   () => updateReleaseScriptVersion('<script defer src="./site.js?v=1"></script>', 'v0.2.0'),

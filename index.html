@@ -73,7 +73,7 @@
     </style>
     <link rel="stylesheet" href="./site-utilities.css?v=1" />
     <link rel="stylesheet" href="./site.css?v=4" />
-    <link rel="stylesheet" href="./vibemeter.css?v=11" />
+    <link rel="stylesheet" href="./vibemeter.css?v=12" />
   </head>
 
   <body class="min-h-screen overflow-x-hidden text-zinc-100">
@@ -395,8 +395,8 @@
         <div class="section-inner">
           <div class="release-section-heading provider-reveal">
             <div>
-              <p class="section-eyebrow" data-i18n="release.eyebrow">Latest release</p>
-              <h2 data-i18n="release.title">What’s new in VibeMeter</h2>
+              <p class="section-eyebrow" data-i18n="release.eyebrow">Release history</p>
+              <h2 data-i18n="release.title">Changelog</h2>
             </div>
             <div class="release-meta" aria-label="Latest release version and date" data-i18n-aria-label="release.metaAria">
               <strong data-release-version>Latest</strong>
@@ -404,12 +404,7 @@
             </div>
           </div>
           <div class="release-notes-card provider-reveal" style="--reveal-delay: 80ms">
-            <p class="release-language-fallback" data-release-fallback hidden></p>
-            <div class="release-notes-content" data-release-notes aria-live="polite"></div>
-            <a class="release-notes-link" href="https://github.com/RangeKing/vibemeter/releases/latest" data-release-url>
-              <span data-i18n="release.fullNotes">View the complete release on GitHub</span>
-              <span aria-hidden="true">↗</span>
-            </a>
+            <div class="release-history-scroll" data-release-history aria-live="polite"></div>
           </div>
         </div>
       </section>
@@ -456,8 +451,8 @@
       </div>
     </footer>
 
-    <script defer src="./release-data.js?v=v0.1.2"></script>
-    <script defer src="./site-locales.js?v=8"></script>
-    <script defer src="./site.js?v=10"></script>
+    <script defer src="./release-data.js?v=v0.1.2-20260803144206-s2"></script>
+    <script defer src="./site-locales.js?v=9"></script>
+    <script defer src="./site.js?v=11"></script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
-import { releaseAssetKeys } from './release-sync-lib.mjs';
+import { releaseAssetKeys, releaseDataCacheKey } from './release-sync-lib.mjs';
 
 function evaluateClassicScript(source, filename) {
   const sandbox = { window: {} };
@@ -16,7 +16,7 @@ const [indexHtml, releaseSource, localeSource] = await Promise.all([
 ]);
 
 const releaseData = evaluateClassicScript(releaseSource, 'release-data.js').VibeMeterReleaseData;
-assert.equal(releaseData.schemaVersion, 1, 'release-data.js must use schema version 1.');
+assert.equal(releaseData.schemaVersion, 2, 'release-data.js must use schema version 2.');
 assert.match(releaseData.version, /^v\d+\.\d+\.\d+/, 'Release version must be a v-prefixed semantic version.');
 assert.equal(new URL(releaseData.releaseUrl).hostname, 'github.com');
 assert.ok(releaseData.releaseUrl.endsWith(`/tag/${releaseData.version}`), 'Release URL and version must match.');
@@ -31,17 +31,41 @@ for (const [key, url] of Object.entries(releaseData.assets)) {
 for (const locale of ['en', 'zh-CN']) {
   const note = releaseData.notes[locale];
   assert.ok(note, `Missing ${locale} release notes.`);
-  assert.ok(['localized', 'fallback'].includes(note.source), `Invalid ${locale} release-note source.`);
+  assert.ok(['localized', 'fallback', 'default'].includes(note.source), `Invalid ${locale} release-note source.`);
   assert.equal(typeof note.markdown, 'string');
 }
+
+assert.ok(Array.isArray(releaseData.releases) && releaseData.releases.length, 'Release history must not be empty.');
+const releaseVersions = new Set();
+let previousPublishedAt = Infinity;
+for (const entry of releaseData.releases) {
+  assert.match(entry.version, /^v\d+\.\d+\.\d+/, 'Release history version must be semantic.');
+  assert.ok(!releaseVersions.has(entry.version), `Duplicate release history entry: ${entry.version}`);
+  releaseVersions.add(entry.version);
+  assert.equal(new URL(entry.releaseUrl).hostname, 'github.com');
+  assert.ok(entry.releaseUrl.endsWith(`/tag/${entry.version}`), 'Release history URL and version must match.');
+  const publishedAt = Date.parse(entry.publishedAt);
+  assert.ok(Number.isFinite(publishedAt), `Invalid release history date: ${entry.version}`);
+  assert.ok(publishedAt <= previousPublishedAt, 'Release history must be ordered newest first.');
+  previousPublishedAt = publishedAt;
+  for (const locale of ['en', 'zh-CN']) {
+    const note = entry.notes?.[locale];
+    assert.ok(note, `Missing ${locale} notes for ${entry.version}.`);
+    assert.ok(['localized', 'fallback', 'default'].includes(note.source), `Invalid ${locale} source for ${entry.version}.`);
+    assert.equal(typeof note.markdown, 'string');
+  }
+}
+const betaRelease = releaseData.releases.find((entry) => entry.version === 'v0.1.0');
+assert.ok(betaRelease, 'Release history must include v0.1.0.');
+assert.equal(betaRelease.notes['zh-CN'].markdown, '测试版正式发布');
 
 assert.ok(indexHtml.includes('release-data.js'), 'index.html must load release-data.js.');
 const releaseScriptVersion = indexHtml.match(/<script\s+defer\s+src=["']\.\/release-data\.js\?v=([^"']+)["']/)?.[1];
 assert.ok(releaseScriptVersion, 'release-data.js must include a version query parameter.');
 assert.equal(
   decodeURIComponent(releaseScriptVersion),
-  releaseData.version,
-  'release-data.js cache key must match the current release version.',
+  releaseDataCacheKey(releaseData),
+  'release-data.js cache key must match the current release data revision.',
 );
 assert.doesNotMatch(indexHtml, /releases\/download\//, 'Download URLs must not be hardcoded in index.html.');
 assert.doesNotMatch(indexHtml, /releases\/tag\/v\d+\.\d+\.\d+/, 'Versioned release URLs must not be hardcoded in index.html.');

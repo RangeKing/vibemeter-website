@@ -101,7 +101,7 @@ jobs:
               --base main \
               --head "$RELEASE_BRANCH" \
               --title "chore: sync VibeMeter $RELEASE_TAG" \
-              --body "Updates the website download assets, version, publication date, and release notes from RangeKing/vibemeter@$RELEASE_TAG. The sync workflow verified all four macOS assets, locale parity, page bindings, and JavaScript syntax before opening this PR.")"
+              --body "Updates the website download assets, version, publication date, and complete release history from RangeKing/vibemeter@$RELEASE_TAG. The sync workflow verified all four macOS assets, locale parity, page bindings, and JavaScript syntax before opening this PR.")"
           fi
           echo "url=$PR_URL" >> "$GITHUB_OUTPUT"
 

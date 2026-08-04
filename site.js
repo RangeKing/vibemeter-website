@@ -652,6 +652,93 @@ function renderReleaseMarkdown(container, markdown) {
   }
 }
 
+function formatReleaseDate(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  return new Intl.DateTimeFormat(activeLanguage, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  }).format(date);
+}
+
+function releaseHistoryEntries() {
+  const entries = Array.isArray(releaseData?.releases) && releaseData.releases.length
+    ? releaseData.releases
+    : [releaseData];
+
+  return entries
+    .filter((entry) => entry?.version)
+    .map((entry, index) => ({ entry, index }))
+    .sort((left, right) => {
+      const dateDifference = Date.parse(right.entry.publishedAt) - Date.parse(left.entry.publishedAt);
+      return Number.isNaN(dateDifference) ? left.index - right.index : dateDifference;
+    })
+    .map(({ entry }) => entry);
+}
+
+function releaseNoteFor(entry) {
+  const note = entry.notes?.[activeLanguage] || entry.notes?.en || entry.notes?.['zh-CN'];
+  if (note?.markdown) return note.markdown;
+  if (entry.version === 'v0.1.0') {
+    return activeLanguage === 'zh-CN' ? '测试版正式发布' : 'First public beta release.';
+  }
+  return '';
+}
+
+function renderReleaseHistory(container) {
+  container.replaceChildren();
+  const entries = releaseHistoryEntries();
+
+  entries.forEach((entry) => {
+    const article = document.createElement('article');
+    article.className = 'release-entry';
+
+    const heading = document.createElement('header');
+    heading.className = 'release-entry-heading';
+
+    const meta = document.createElement('div');
+    meta.className = 'release-entry-meta';
+
+    const version = document.createElement('strong');
+    version.className = 'release-entry-version';
+    version.textContent = entry.version;
+
+    const date = document.createElement('time');
+    date.className = 'release-entry-date';
+    date.dateTime = entry.publishedAt || '';
+    date.textContent = formatReleaseDate(entry.publishedAt);
+    meta.append(version, date);
+
+    const link = document.createElement('a');
+    link.className = 'release-notes-link release-entry-link';
+    link.href = entry.releaseUrl || releaseData.releaseUrl;
+    const linkText = document.createElement('span');
+    linkText.textContent = message('release.fullNotes');
+    const arrow = document.createElement('span');
+    arrow.setAttribute('aria-hidden', 'true');
+    arrow.textContent = '↗';
+    link.append(linkText, arrow);
+
+    heading.append(meta, link);
+
+    const notes = document.createElement('div');
+    notes.className = 'release-entry-notes';
+    renderReleaseMarkdown(notes, releaseNoteFor(entry));
+
+    article.append(heading, notes);
+    container.append(article);
+  });
+
+  if (!entries.length) {
+    const empty = document.createElement('p');
+    empty.className = 'release-history-empty';
+    empty.textContent = message('release.empty');
+    container.append(empty);
+  }
+}
+
 function renderReleaseData() {
   if (!releaseData) return;
 
@@ -666,28 +753,12 @@ function renderReleaseData() {
     element.textContent = releaseData.version;
   });
 
-  const publishedDate = new Date(releaseData.publishedAt);
-  const formattedDate = Number.isNaN(publishedDate.getTime())
-    ? ''
-    : new Intl.DateTimeFormat(activeLanguage, {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      timeZone: 'UTC',
-    }).format(publishedDate);
   document.querySelectorAll('[data-release-date]').forEach((element) => {
     element.dateTime = releaseData.publishedAt;
-    element.textContent = formattedDate;
+    element.textContent = formatReleaseDate(releaseData.publishedAt);
   });
-
-  const note = releaseData.notes?.[activeLanguage] || releaseData.notes?.en || { source: 'fallback', markdown: '' };
-  const fallback = document.querySelector('[data-release-fallback]');
-  if (fallback) {
-    fallback.hidden = note.source !== 'fallback';
-    fallback.textContent = note.source === 'fallback' ? message('release.fallback') : '';
-  }
-  document.querySelectorAll('[data-release-notes]').forEach((container) => {
-    renderReleaseMarkdown(container, note.markdown);
+  document.querySelectorAll('[data-release-history]').forEach((container) => {
+    renderReleaseHistory(container);
   });
 }
 
