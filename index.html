@@ -39,6 +39,38 @@
         document.documentElement.dataset.themePreference = preference;
       })();
     </script>
+    <script>
+      (() => {
+        const normalizeLocale = (value) => {
+          const lower = String(value || '').toLowerCase();
+          if (lower === 'zh' || lower === 'zh-cn' || lower === 'zh-hans' || lower.startsWith('zh-cn-')) return 'zh-CN';
+          if (lower === 'en' || lower.startsWith('en-')) return 'en';
+          return null;
+        };
+
+        let locale = null;
+        try {
+          locale = normalizeLocale(new URLSearchParams(location.search).get('lang'));
+          if (!locale) locale = normalizeLocale(localStorage.getItem('vibemeter-language'));
+        } catch (_) {}
+
+        if (!locale) {
+          for (const language of navigator.languages || [navigator.language]) {
+            locale = normalizeLocale(language);
+            if (locale) break;
+          }
+        }
+
+        locale ||= 'en';
+        document.documentElement.lang = locale;
+        document.documentElement.dataset.initialLocale = locale;
+        document.documentElement.dataset.i18nPending = 'true';
+      })();
+    </script>
+    <style>
+      html[data-i18n-pending="true"] body { visibility: hidden; }
+      html[data-i18n-pending="true"] .reveal { animation-play-state: paused; }
+    </style>
     <link rel="stylesheet" href="./site-utilities.css?v=1" />
     <link rel="stylesheet" href="./site.css?v=4" />
     <link rel="stylesheet" href="./vibemeter.css?v=11" />
@@ -426,6 +458,6 @@
 
     <script defer src="./release-data.js?v=v0.1.2"></script>
     <script defer src="./site-locales.js?v=8"></script>
-    <script defer src="./site.js?v=9"></script>
+    <script defer src="./site.js?v=10"></script>
   </body>
 </html>

@@ -522,7 +522,7 @@ function selectedLocale() {
   return 'en';
 }
 
-let activeLanguage = selectedLocale();
+let activeLanguage = normalizeLocale(root.dataset.initialLocale) || selectedLocale();
 if (!supportedLanguages.has(activeLanguage)) activeLanguage = 'en';
 
 function message(key) {
@@ -750,6 +750,8 @@ function selectLanguage(languageId) {
 
 renderLanguageMenu();
 updateLanguageUi();
+delete root.dataset.i18nPending;
+root.dataset.i18nReady = 'true';
 
 languageTrigger.addEventListener('click', () => {
   setLanguageMenuOpen(languageMenu.hidden, { focusOption: languageMenu.hidden });
