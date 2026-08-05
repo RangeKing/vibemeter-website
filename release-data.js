@@ -2,10 +2,10 @@
 window.VibeMeterReleaseData = {
   "schemaVersion": 2,
   "sourceRepo": "RangeKing/vibemeter",
-  "version": "v0.1.3",
-  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.3",
-  "publishedAt": "2026-08-05T02:27:48Z",
-  "releaseUpdatedAt": "2026-08-05T02:30:00Z",
+  "version": "v0.1.4",
+  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.4",
+  "publishedAt": "2026-08-05T11:54:10Z",
+  "releaseUpdatedAt": "2026-08-05T11:56:16Z",
   "notes": {
     "zh-CN": {
       "source": "fallback",
@@ -17,18 +17,18 @@ window.VibeMeterReleaseData = {
     }
   },
   "assets": {
-    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.3/VibeMeter_0.1.3_macOS_aarch64.dmg",
-    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.3/VibeMeter_v0.1.3_macOS_arm64.zip",
-    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.3/VibeMeter_0.1.3_macOS_x64.dmg",
-    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.3/VibeMeter_v0.1.3_macOS_x64.zip"
+    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.4/VibeMeter_0.1.4_macOS_aarch64.dmg",
+    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.4/VibeMeter_v0.1.4_macOS_arm64.zip",
+    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.4/VibeMeter_0.1.4_macOS_x64.dmg",
+    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.4/VibeMeter_v0.1.4_macOS_x64.zip"
   },
   "releases": [
     {
       "sourceRepo": "RangeKing/vibemeter",
-      "version": "v0.1.3",
-      "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.3",
-      "publishedAt": "2026-08-05T02:27:48Z",
-      "releaseUpdatedAt": "2026-08-05T02:30:00Z",
+      "version": "v0.1.4",
+      "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.4",
+      "publishedAt": "2026-08-05T11:54:10Z",
+      "releaseUpdatedAt": "2026-08-05T11:56:16Z",
       "notes": {
         "zh-CN": {
           "source": "fallback",
@@ -42,10 +42,27 @@ window.VibeMeterReleaseData = {
     },
     {
       "sourceRepo": "RangeKing/vibemeter",
+      "version": "v0.1.3",
+      "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.3",
+      "publishedAt": "2026-08-05T02:27:48Z",
+      "releaseUpdatedAt": "2026-08-05T05:16:20Z",
+      "notes": {
+        "zh-CN": {
+          "source": "localized",
+          "markdown": "VibeMeter 0.1.3 改善了 Data 与 Live 两个核心页面的真实状态展示。\n\n### 主要变化\n\n- 数据页默认隐藏本机未检测到、未记录，或当前时间范围 Token 用量为 0 的 Agent；仍可通过筛选按钮手动查看。\n- Token 活动现在显示用量最大的格子，以及对应的日期和 Token 用量。\n- 移除数据卡片重复的副标题，让信息层级更紧凑。\n- Codex `turn_aborted` 会显示为“已暂停”，不再把暂停会话显示为运行中；新一轮开始后可以恢复为运行中。\n- 忽略 Codex Memory 子会话的终止事件，避免将父会话错误刷新为运行中。\n- 中英文界面与所有版本面已统一到 `0.1.3`。"
+        },
+        "en": {
+          "source": "localized",
+          "markdown": "VibeMeter 0.1.3 improves truthful state presentation across the Data and Live pages.\n\n### Highlights\n\n- Hide Agents that are not detected locally, not recorded, or have zero Token usage in the selected range by default; they remain available through manual filters.\n- Show the largest Token Activity cell with its date and Token usage.\n- Remove repetitive Data card subtitles for a tighter information hierarchy.\n- Represent Codex `turn_aborted` sessions as Paused instead of Running; a new turn can resume the session.\n- Ignore terminal Codex Memory child events so they cannot incorrectly revive a parent session as Running.\n- Align the bilingual UI and all version surfaces at `0.1.3`."
+        }
+      }
+    },
+    {
+      "sourceRepo": "RangeKing/vibemeter",
       "version": "v0.1.2",
       "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.2",
       "publishedAt": "2026-08-03T14:41:39Z",
-      "releaseUpdatedAt": "2026-08-03T14:45:53Z",
+      "releaseUpdatedAt": "2026-08-05T05:16:43Z",
       "notes": {
         "zh-CN": {
           "source": "localized",
@@ -53,7 +70,7 @@ window.VibeMeterReleaseData = {
         },
         "en": {
           "source": "localized",
-          "markdown": "`v0.1.2` removes empty work-event noise from Data and keeps the displayed version aligned with the packaged build.\n\n### Fixes and improvements\n\n- Metadata-only sessions without a title, project, token usage, file/line changes, commits, verification, or errors are no longer shown as work-event cards on Data; the raw sessions remain available in the session ledger.\n- Tasks with no edit evidence now show “No edit evidence” instead of being mislabeled “Unverified.”\n- Settings now reads the application version from the package configuration and removes the “· local beta” suffix; this build displays `VibeMeter 0.1.2`.\n- Rust provider client metadata and User-Agent strings now follow the packaged Cargo version.\n\n### Validation\n\n- Frontend: 55 tests passed.\n- Rust: 110 tests passed; 1 local-database audit test ignored by design."
+          "markdown": "`v0.1.2` removes empty work-event noise from Data and keeps the displayed version aligned with the packaged build.\n\n### Fixes and improvements\n\n- Metadata-only sessions without a title, project, token usage, file/line changes, commits, verification, or errors are no longer shown as work-event cards on Data; the raw sessions remain available in the session ledger.\n- Tasks with no edit evidence now show “No edit evidence” instead of being mislabeled “Unverified.”\n- Settings now reads the application version from the package configuration and removes the “· local beta” suffix; this build displays `VibeMeter 0.1.2`.\n- Rust provider client metadata and User-Agent strings now follow the packaged Cargo version."
         }
       }
     },
