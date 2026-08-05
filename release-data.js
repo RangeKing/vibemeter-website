@@ -2,41 +2,58 @@
 window.VibeMeterReleaseData = {
   "schemaVersion": 2,
   "sourceRepo": "RangeKing/vibemeter",
-  "version": "v0.1.2",
-  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.2",
-  "publishedAt": "2026-08-03T14:41:39Z",
-  "releaseUpdatedAt": "2026-08-03T14:42:06Z",
-  "assets": {
-    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.2/VibeMeter_0.1.2_macOS_aarch64.dmg",
-    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.2/VibeMeter_v0.1.2_macOS_arm64.zip",
-    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.2/VibeMeter_0.1.2_macOS_x64.dmg",
-    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.2/VibeMeter_v0.1.2_macOS_x64.zip"
-  },
+  "version": "v0.1.3",
+  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.3",
+  "publishedAt": "2026-08-05T02:27:48Z",
+  "releaseUpdatedAt": "2026-08-05T02:30:00Z",
   "notes": {
     "zh-CN": {
-      "source": "localized",
-      "markdown": "`v0.1.2` 修复数据页空会话噪声，并让版本信息与实际构建保持一致。\n\n- 过滤没有标题、项目、Token、文件/行变更、提交、验证或错误证据的仅元数据会话；它们不再出现在数据页的工作事件卡片中，原始会话仍保留在会话台账。\n- 对确实没有编辑证据的任务显示“无编辑证据”，不再误称为“未验证”。\n- 设置页版本号改为读取应用版本配置，移除“· 本机测试版”；本版本显示为 `VibeMeter 0.1.2`。\n- Rust provider 的客户端元数据和 User-Agent 版本改为跟随打包后的 Cargo 版本。"
+      "source": "fallback",
+      "markdown": "Download the DMG or ZIP matching your Mac. Apple Silicon is for M-series Macs; Intel is for Intel-based Macs. Builds are ad-hoc signed and are not notarized."
     },
     "en": {
-      "source": "localized",
-      "markdown": "`v0.1.2` removes empty work-event noise from Data and keeps the displayed version aligned with the packaged build.\n\n- Metadata-only sessions without a title, project, token usage, file/line changes, commits, verification, or errors are no longer shown as work-event cards on Data; the raw sessions remain available in the session ledger.\n- Tasks with no edit evidence now show “No edit evidence” instead of being mislabeled “Unverified.”\n- Settings now reads the application version from the package configuration and removes the “· local beta” suffix; this build displays `VibeMeter 0.1.2`.\n- Rust provider client metadata and User-Agent strings now follow the packaged Cargo version.\n\n- Frontend: 55 tests passed.\n- Rust: 110 tests passed; 1 local-database audit test ignored by design."
+      "source": "fallback",
+      "markdown": "Download the DMG or ZIP matching your Mac. Apple Silicon is for M-series Macs; Intel is for Intel-based Macs. Builds are ad-hoc signed and are not notarized."
     }
   },
+  "assets": {
+    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.3/VibeMeter_0.1.3_macOS_aarch64.dmg",
+    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.3/VibeMeter_v0.1.3_macOS_arm64.zip",
+    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.3/VibeMeter_0.1.3_macOS_x64.dmg",
+    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.3/VibeMeter_v0.1.3_macOS_x64.zip"
+  },
   "releases": [
+    {
+      "sourceRepo": "RangeKing/vibemeter",
+      "version": "v0.1.3",
+      "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.3",
+      "publishedAt": "2026-08-05T02:27:48Z",
+      "releaseUpdatedAt": "2026-08-05T02:30:00Z",
+      "notes": {
+        "zh-CN": {
+          "source": "fallback",
+          "markdown": "Download the DMG or ZIP matching your Mac. Apple Silicon is for M-series Macs; Intel is for Intel-based Macs. Builds are ad-hoc signed and are not notarized."
+        },
+        "en": {
+          "source": "fallback",
+          "markdown": "Download the DMG or ZIP matching your Mac. Apple Silicon is for M-series Macs; Intel is for Intel-based Macs. Builds are ad-hoc signed and are not notarized."
+        }
+      }
+    },
     {
       "sourceRepo": "RangeKing/vibemeter",
       "version": "v0.1.2",
       "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.2",
       "publishedAt": "2026-08-03T14:41:39Z",
-      "releaseUpdatedAt": "2026-08-03T14:42:06Z",
+      "releaseUpdatedAt": "2026-08-03T14:45:53Z",
       "notes": {
         "zh-CN": {
           "source": "localized",
-          "markdown": "`v0.1.2` 修复数据页空会话噪声，并让版本信息与实际构建保持一致。\n\n- 过滤没有标题、项目、Token、文件/行变更、提交、验证或错误证据的仅元数据会话；它们不再出现在数据页的工作事件卡片中，原始会话仍保留在会话台账。\n- 对确实没有编辑证据的任务显示“无编辑证据”，不再误称为“未验证”。\n- 设置页版本号改为读取应用版本配置，移除“· 本机测试版”；本版本显示为 `VibeMeter 0.1.2`。\n- Rust provider 的客户端元数据和 User-Agent 版本改为跟随打包后的 Cargo 版本。"
+          "markdown": "`v0.1.2` 修复数据页空会话噪声，并让版本信息与实际构建保持一致。\n\n### 修复与改进\n\n- 过滤没有标题、项目、Token、文件/行变更、提交、验证或错误证据的仅元数据会话；它们不再出现在数据页的工作事件卡片中，原始会话仍保留在会话台账。\n- 对确实没有编辑证据的任务显示“无编辑证据”，不再误称为“未验证”。\n- 设置页版本号改为读取应用版本配置，移除“· 本机测试版”；本版本显示为 `VibeMeter 0.1.2`。\n- Rust provider 的客户端元数据和 User-Agent 版本改为跟随打包后的 Cargo 版本。"
         },
         "en": {
           "source": "localized",
-          "markdown": "`v0.1.2` removes empty work-event noise from Data and keeps the displayed version aligned with the packaged build.\n\n- Metadata-only sessions without a title, project, token usage, file/line changes, commits, verification, or errors are no longer shown as work-event cards on Data; the raw sessions remain available in the session ledger.\n- Tasks with no edit evidence now show “No edit evidence” instead of being mislabeled “Unverified.”\n- Settings now reads the application version from the package configuration and removes the “· local beta” suffix; this build displays `VibeMeter 0.1.2`.\n- Rust provider client metadata and User-Agent strings now follow the packaged Cargo version.\n\n- Frontend: 55 tests passed.\n- Rust: 110 tests passed; 1 local-database audit test ignored by design."
+          "markdown": "`v0.1.2` removes empty work-event noise from Data and keeps the displayed version aligned with the packaged build.\n\n### Fixes and improvements\n\n- Metadata-only sessions without a title, project, token usage, file/line changes, commits, verification, or errors are no longer shown as work-event cards on Data; the raw sessions remain available in the session ledger.\n- Tasks with no edit evidence now show “No edit evidence” instead of being mislabeled “Unverified.”\n- Settings now reads the application version from the package configuration and removes the “· local beta” suffix; this build displays `VibeMeter 0.1.2`.\n- Rust provider client metadata and User-Agent strings now follow the packaged Cargo version.\n\n### Validation\n\n- Frontend: 55 tests passed.\n- Rust: 110 tests passed; 1 local-database audit test ignored by design."
         }
       }
     },
