@@ -187,11 +187,11 @@ function defaultNotesForRelease(version) {
   return null;
 }
 
-function isEmptyOrGenericReleaseBody(body) {
+export function isEmptyOrGenericReleaseBody(body) {
   const original = String(body || '').trim();
   if (!original) return true;
-  return /download the dmg or zip matching your mac/i.test(original)
-    && !/^#{1,6}\s+(?:中文|简体中文|english|英文)/imu.test(original);
+  if (!/download the dmg or zip matching your mac/i.test(original)) return false;
+  return !Object.values(parseLocalizedNotes(original)).some((note) => note.source === 'localized');
 }
 
 export function selectReleaseAssets(assets = []) {

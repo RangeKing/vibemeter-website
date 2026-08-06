@@ -54,6 +54,12 @@ for (const entry of releaseData.releases) {
     assert.ok(['localized', 'fallback', 'default'].includes(note.source), `Invalid ${locale} source for ${entry.version}.`);
     assert.equal(typeof note.markdown, 'string');
   }
+  if (entry.version !== 'v0.1.0') {
+    assert.ok(
+      ['en', 'zh-CN'].some((locale) => entry.notes[locale].source === 'localized'),
+      `${entry.version} must contain release notes before it can be published.`,
+    );
+  }
 }
 const betaRelease = releaseData.releases.find((entry) => entry.version === 'v0.1.0');
 assert.ok(betaRelease, 'Release history must include v0.1.0.');

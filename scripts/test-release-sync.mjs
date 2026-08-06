@@ -4,6 +4,7 @@ import {
   buildReleaseData,
   buildReleaseHistory,
   extractReleaseSection,
+  isEmptyOrGenericReleaseBody,
   parseLocalizedNotes,
   releaseDataCacheKey,
   selectReleaseAssets,
@@ -115,6 +116,9 @@ assert.deepEqual(parseLocalizedNotes(originalOnly), {
   'zh-CN': { source: 'fallback', markdown: originalOnly },
   en: { source: 'fallback', markdown: originalOnly },
 });
+const genericReleaseBody = 'Download the DMG or ZIP matching your Mac. Apple Silicon is for M-series Macs; Intel is for Intel-based Macs. Builds are ad-hoc signed and are not notarized.';
+assert.equal(isEmptyOrGenericReleaseBody(genericReleaseBody), true);
+assert.equal(isEmptyOrGenericReleaseBody(`${genericReleaseBody}\n\n## 中文\n- 修复发布说明同步。`), false);
 
 assert.throws(() => selectReleaseAssets(assets.slice(1)), /exactly one arm64\.dmg/);
 assert.throws(() => selectReleaseAssets([...assets, assets[0]]), /found 2/);

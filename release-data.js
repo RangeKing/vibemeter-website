@@ -2,41 +2,75 @@
 window.VibeMeterReleaseData = {
   "schemaVersion": 2,
   "sourceRepo": "RangeKing/vibemeter",
-  "version": "v0.1.2",
-  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.2",
-  "publishedAt": "2026-08-03T14:41:39Z",
-  "releaseUpdatedAt": "2026-08-03T14:42:06Z",
-  "assets": {
-    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.2/VibeMeter_0.1.2_macOS_aarch64.dmg",
-    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.2/VibeMeter_v0.1.2_macOS_arm64.zip",
-    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.2/VibeMeter_0.1.2_macOS_x64.dmg",
-    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.2/VibeMeter_v0.1.2_macOS_x64.zip"
-  },
+  "version": "v0.1.4",
+  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.4",
+  "publishedAt": "2026-08-05T11:54:10Z",
+  "releaseUpdatedAt": "2026-08-05T11:57:00Z",
   "notes": {
     "zh-CN": {
       "source": "localized",
-      "markdown": "`v0.1.2` 修复数据页空会话噪声，并让版本信息与实际构建保持一致。\n\n- 过滤没有标题、项目、Token、文件/行变更、提交、验证或错误证据的仅元数据会话；它们不再出现在数据页的工作事件卡片中，原始会话仍保留在会话台账。\n- 对确实没有编辑证据的任务显示“无编辑证据”，不再误称为“未验证”。\n- 设置页版本号改为读取应用版本配置，移除“· 本机测试版”；本版本显示为 `VibeMeter 0.1.2`。\n- Rust provider 的客户端元数据和 User-Agent 版本改为跟随打包后的 Cargo 版本。"
+      "markdown": "- 修复菜单栏弹出窗口中的额度重置提示：增强文字字重，并显示距离重置的剩余时间。\n- 修复数据页 Token 趋势图的数值显示：保留实际观测点，避免折线、纵坐标和提示数值不一致。\n- 优化 Cursor Dashboard 用量读取：设置页在读取期间显示旋转状态，读取内容移至数据页独立展示。\n- 数据页现在显示 Cursor 账户 Token 与成本，并明确区分远程账户数据和本机历史统计；读取中或不可用时展示对应状态。"
     },
     "en": {
       "source": "localized",
-      "markdown": "`v0.1.2` removes empty work-event noise from Data and keeps the displayed version aligned with the packaged build.\n\n- Metadata-only sessions without a title, project, token usage, file/line changes, commits, verification, or errors are no longer shown as work-event cards on Data; the raw sessions remain available in the session ledger.\n- Tasks with no edit evidence now show “No edit evidence” instead of being mislabeled “Unverified.”\n- Settings now reads the application version from the package configuration and removes the “· local beta” suffix; this build displays `VibeMeter 0.1.2`.\n- Rust provider client metadata and User-Agent strings now follow the packaged Cargo version.\n\n- Frontend: 55 tests passed.\n- Rust: 110 tests passed; 1 local-database audit test ignored by design."
+      "markdown": "- Improved the menu bar quota reset notice with stronger typography and a remaining-time countdown.\n- Fixed Data trend values so plotted points, the y-axis, and tooltips stay aligned with observed Token usage.\n- Improved Cursor Dashboard usage loading with an explicit spinner in Settings and moved account details to a dedicated Data-page panel.\n- Data now shows Cursor account Token and cost with clear separation from local history, including explicit loading and unavailable states."
     }
   },
+  "assets": {
+    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.4/VibeMeter_0.1.4_macOS_aarch64.dmg",
+    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.4/VibeMeter_v0.1.4_macOS_arm64.zip",
+    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.4/VibeMeter_0.1.4_macOS_x64.dmg",
+    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.1.4/VibeMeter_v0.1.4_macOS_x64.zip"
+  },
   "releases": [
+    {
+      "sourceRepo": "RangeKing/vibemeter",
+      "version": "v0.1.4",
+      "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.4",
+      "publishedAt": "2026-08-05T11:54:10Z",
+      "releaseUpdatedAt": "2026-08-05T11:57:00Z",
+      "notes": {
+        "zh-CN": {
+          "source": "localized",
+          "markdown": "- 修复菜单栏弹出窗口中的额度重置提示：增强文字字重，并显示距离重置的剩余时间。\n- 修复数据页 Token 趋势图的数值显示：保留实际观测点，避免折线、纵坐标和提示数值不一致。\n- 优化 Cursor Dashboard 用量读取：设置页在读取期间显示旋转状态，读取内容移至数据页独立展示。\n- 数据页现在显示 Cursor 账户 Token 与成本，并明确区分远程账户数据和本机历史统计；读取中或不可用时展示对应状态。"
+        },
+        "en": {
+          "source": "localized",
+          "markdown": "- Improved the menu bar quota reset notice with stronger typography and a remaining-time countdown.\n- Fixed Data trend values so plotted points, the y-axis, and tooltips stay aligned with observed Token usage.\n- Improved Cursor Dashboard usage loading with an explicit spinner in Settings and moved account details to a dedicated Data-page panel.\n- Data now shows Cursor account Token and cost with clear separation from local history, including explicit loading and unavailable states."
+        }
+      }
+    },
+    {
+      "sourceRepo": "RangeKing/vibemeter",
+      "version": "v0.1.3",
+      "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.3",
+      "publishedAt": "2026-08-05T02:27:48Z",
+      "releaseUpdatedAt": "2026-08-05T05:16:20Z",
+      "notes": {
+        "zh-CN": {
+          "source": "localized",
+          "markdown": "VibeMeter 0.1.3 改善了 Data 与 Live 两个核心页面的真实状态展示。\n\n### 主要变化\n\n- 数据页默认隐藏本机未检测到、未记录，或当前时间范围 Token 用量为 0 的 Agent；仍可通过筛选按钮手动查看。\n- Token 活动现在显示用量最大的格子，以及对应的日期和 Token 用量。\n- 移除数据卡片重复的副标题，让信息层级更紧凑。\n- Codex `turn_aborted` 会显示为“已暂停”，不再把暂停会话显示为运行中；新一轮开始后可以恢复为运行中。\n- 忽略 Codex Memory 子会话的终止事件，避免将父会话错误刷新为运行中。\n- 中英文界面与所有版本面已统一到 `0.1.3`。"
+        },
+        "en": {
+          "source": "localized",
+          "markdown": "VibeMeter 0.1.3 improves truthful state presentation across the Data and Live pages.\n\n### Highlights\n\n- Hide Agents that are not detected locally, not recorded, or have zero Token usage in the selected range by default; they remain available through manual filters.\n- Show the largest Token Activity cell with its date and Token usage.\n- Remove repetitive Data card subtitles for a tighter information hierarchy.\n- Represent Codex `turn_aborted` sessions as Paused instead of Running; a new turn can resume the session.\n- Ignore terminal Codex Memory child events so they cannot incorrectly revive a parent session as Running.\n- Align the bilingual UI and all version surfaces at `0.1.3`."
+        }
+      }
+    },
     {
       "sourceRepo": "RangeKing/vibemeter",
       "version": "v0.1.2",
       "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.1.2",
       "publishedAt": "2026-08-03T14:41:39Z",
-      "releaseUpdatedAt": "2026-08-03T14:42:06Z",
+      "releaseUpdatedAt": "2026-08-05T05:16:43Z",
       "notes": {
         "zh-CN": {
           "source": "localized",
-          "markdown": "`v0.1.2` 修复数据页空会话噪声，并让版本信息与实际构建保持一致。\n\n- 过滤没有标题、项目、Token、文件/行变更、提交、验证或错误证据的仅元数据会话；它们不再出现在数据页的工作事件卡片中，原始会话仍保留在会话台账。\n- 对确实没有编辑证据的任务显示“无编辑证据”，不再误称为“未验证”。\n- 设置页版本号改为读取应用版本配置，移除“· 本机测试版”；本版本显示为 `VibeMeter 0.1.2`。\n- Rust provider 的客户端元数据和 User-Agent 版本改为跟随打包后的 Cargo 版本。"
+          "markdown": "`v0.1.2` 修复数据页空会话噪声，并让版本信息与实际构建保持一致。\n\n### 修复与改进\n\n- 过滤没有标题、项目、Token、文件/行变更、提交、验证或错误证据的仅元数据会话；它们不再出现在数据页的工作事件卡片中，原始会话仍保留在会话台账。\n- 对确实没有编辑证据的任务显示“无编辑证据”，不再误称为“未验证”。\n- 设置页版本号改为读取应用版本配置，移除“· 本机测试版”；本版本显示为 `VibeMeter 0.1.2`。\n- Rust provider 的客户端元数据和 User-Agent 版本改为跟随打包后的 Cargo 版本。"
         },
         "en": {
           "source": "localized",
-          "markdown": "`v0.1.2` removes empty work-event noise from Data and keeps the displayed version aligned with the packaged build.\n\n- Metadata-only sessions without a title, project, token usage, file/line changes, commits, verification, or errors are no longer shown as work-event cards on Data; the raw sessions remain available in the session ledger.\n- Tasks with no edit evidence now show “No edit evidence” instead of being mislabeled “Unverified.”\n- Settings now reads the application version from the package configuration and removes the “· local beta” suffix; this build displays `VibeMeter 0.1.2`.\n- Rust provider client metadata and User-Agent strings now follow the packaged Cargo version.\n\n- Frontend: 55 tests passed.\n- Rust: 110 tests passed; 1 local-database audit test ignored by design."
+          "markdown": "`v0.1.2` removes empty work-event noise from Data and keeps the displayed version aligned with the packaged build.\n\n### Fixes and improvements\n\n- Metadata-only sessions without a title, project, token usage, file/line changes, commits, verification, or errors are no longer shown as work-event cards on Data; the raw sessions remain available in the session ledger.\n- Tasks with no edit evidence now show “No edit evidence” instead of being mislabeled “Unverified.”\n- Settings now reads the application version from the package configuration and removes the “· local beta” suffix; this build displays `VibeMeter 0.1.2`.\n- Rust provider client metadata and User-Agent strings now follow the packaged Cargo version."
         }
       }
     },

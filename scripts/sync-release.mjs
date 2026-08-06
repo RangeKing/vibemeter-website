@@ -2,10 +2,13 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import {
   buildReleaseCollection,
+  isEmptyOrGenericReleaseBody,
   releaseDataCacheKey,
   serializeReleaseData,
   updateReleaseScriptVersion,
 } from './release-sync-lib.mjs';
+
+const RELEASE_BODY_RETRY_DELAYS_MS = [0, 5_000, 10_000, 20_000, 30_000, 60_000];
 
 function parseArguments(values) {
   const options = {
@@ -53,6 +56,19 @@ async function fetchRelease(repo, tag) {
   return fetchGithubJson(`https://api.github.com/repos/${repo}/releases/tags/${encodeURIComponent(tag)}`);
 }
 
+async function fetchReleaseWithNotes(repo, tag) {
+  for (const delayMs of RELEASE_BODY_RETRY_DELAYS_MS) {
+    if (delayMs) {
+      console.warn(`Release ${tag} has no release notes yet; retrying in ${delayMs / 1000}s.`);
+      await new Promise((resolveDelay) => setTimeout(resolveDelay, delayMs));
+    }
+    const release = await fetchRelease(repo, tag);
+    if (tag === 'v0.1.0' || !isEmptyOrGenericReleaseBody(release.body)) return release;
+  }
+
+  throw new Error(`Release ${tag} still has no non-generic release notes after waiting for the release body.`);
+}
+
 async function fetchReleaseHistory(repo) {
   const releases = [];
   for (let page = 1; page <= 10; page += 1) {
@@ -67,7 +83,7 @@ async function fetchReleaseHistory(repo) {
 
 async function fetchReleaseData(repo, tag) {
   const [release, history] = await Promise.all([
-    fetchRelease(repo, tag),
+    fetchReleaseWithNotes(repo, tag),
     fetchReleaseHistory(repo),
   ]);
   return { release, history };

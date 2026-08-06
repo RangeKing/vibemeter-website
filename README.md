@@ -47,9 +47,9 @@ node scripts/verify-release-assets.mjs
 
 主仓库完成 Apple Silicon 与 Intel 构建并上传四个附件后，`release.yml` 使用 `repository_dispatch` 通知本仓库。`sync-release.yml` 随后完成以下工作：
 
-1. 获取指定 GitHub Release 及公开 Release 历史，并确认 ARM64/x64 的 DMG 和 ZIP 均已上传；
+1. 获取指定 GitHub Release 及公开 Release 历史，并确认 ARM64/x64 的 DMG 和 ZIP 均已上传；如果发布事件早于正文写入，会自动等待并重试获取 Release note；
 2. 生成 `release-data.js`，提取版本号、发布日期、下载地址和全部更新日志；
-3. 校验 JavaScript、双语键、下载链接和页面绑定；
+3. 校验 JavaScript、双语键、下载链接和页面绑定；除 v0.1.0 的默认文案外，没有任何 Release note 的版本会被拒绝发布；
 4. 创建版本同步 PR，并在仓库允许时启用自动 squash 合并；如果仓库未开启自动合并，工作流会在自身校验全部通过后直接 squash 合并。
 
 需要完成两项仓库设置：
