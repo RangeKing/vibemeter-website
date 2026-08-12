@@ -111,6 +111,16 @@ const collection = buildReleaseCollection(releasePayload, [betaRelease], 'RangeK
 assert.deepEqual(collection.releases.map((entry) => entry.version), ['v0.2.0', 'v0.1.0']);
 assert.equal(collection.schemaVersion, 2);
 
+const collectionWithStaleCurrentRelease = buildReleaseCollection(releasePayload, [{
+  ...releasePayload,
+  body: 'Download the DMG or ZIP matching your Mac. Apple Silicon is for M-series Macs; Intel is for Intel-based Macs. Builds are ad-hoc signed and are not notarized.',
+  updated_at: '2026-08-02T00:04:00Z',
+}, betaRelease], 'RangeKing/vibemeter');
+const currentHistoryEntry = collectionWithStaleCurrentRelease.releases.find((entry) => entry.version === 'v0.2.0');
+assert.equal(currentHistoryEntry.notes['zh-CN'].source, 'localized');
+assert.equal(currentHistoryEntry.notes.en.source, 'localized');
+assert.equal(currentHistoryEntry.releaseUpdatedAt, releasePayload.updated_at);
+
 const originalOnly = 'A release body without localized headings.';
 assert.deepEqual(parseLocalizedNotes(originalOnly), {
   'zh-CN': { source: 'fallback', markdown: originalOnly },

@@ -251,18 +251,18 @@ export function buildReleaseData(release, sourceRepo = 'RangeKing/vibemeter') {
 
 export function buildReleaseCollection(release, releases = [], sourceRepo = 'RangeKing/vibemeter') {
   const latest = buildReleaseData(release, sourceRepo);
-  const history = buildReleaseHistory(releases, sourceRepo);
-  if (!history.some((entry) => entry.version === latest.version)) {
-    history.push({
-      sourceRepo: latest.sourceRepo,
-      version: latest.version,
-      releaseUrl: latest.releaseUrl,
-      publishedAt: latest.publishedAt,
-      releaseUpdatedAt: latest.releaseUpdatedAt,
-      notes: latest.notes,
-    });
-    history.sort((left, right) => Date.parse(right.publishedAt) - Date.parse(left.publishedAt));
-  }
+  const latestHistoryEntry = {
+    sourceRepo: latest.sourceRepo,
+    version: latest.version,
+    releaseUrl: latest.releaseUrl,
+    publishedAt: latest.publishedAt,
+    releaseUpdatedAt: latest.releaseUpdatedAt,
+    notes: latest.notes,
+  };
+  const history = buildReleaseHistory(releases, sourceRepo)
+    .filter((entry) => entry.version !== latest.version);
+  history.push(latestHistoryEntry);
+  history.sort((left, right) => Date.parse(right.publishedAt) - Date.parse(left.publishedAt));
 
   return {
     ...latest,
