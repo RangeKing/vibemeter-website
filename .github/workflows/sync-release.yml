@@ -109,12 +109,6 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         env:
           PR_URL: ${{ steps.pull-request.outputs.url }}
-        shell: bash
         run: |
-          if [[ "$(gh api "repos/$GITHUB_REPOSITORY" --jq '.allow_auto_merge')" == "true" ]]; then
-            echo "Repository auto-merge is enabled; queueing the validated PR."
-            gh pr merge "$PR_URL" --auto --squash --delete-branch
-          else
-            echo "Repository auto-merge is disabled; merging the validated PR directly."
-            gh pr merge "$PR_URL" --squash --delete-branch
-          fi
+          echo "Merging the validated release PR."
+          gh pr merge "$PR_URL" --squash --delete-branch
