@@ -2,27 +2,44 @@
 window.VibeMeterReleaseData = {
   "schemaVersion": 2,
   "sourceRepo": "RangeKing/vibemeter",
-  "version": "v0.3.0",
-  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.3.0",
-  "publishedAt": "2026-08-12T16:04:36Z",
-  "releaseUpdatedAt": "2026-08-12T16:14:36Z",
+  "version": "v0.3.1",
+  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.3.1",
+  "publishedAt": "2026-08-13T05:07:46Z",
+  "releaseUpdatedAt": "2026-08-13T05:10:17Z",
   "notes": {
     "zh-CN": {
       "source": "localized",
-      "markdown": "VibeMeter 0.3.0 不只告诉你 Agent 正在做什么，也开始说明什么时候值得你介入。为此，这个版本同时重建了实时与历史证据链。\n\n### 新增\n\n- **工作脉搏**：把生命周期、工作阶段、关注信号和数据新鲜度拆开呈现，避免用单一状态掩盖证据差异。\n- **注意力队列**：在实时页与 Notch 中统一展示需要你、阻塞错误、疑似卡住和待确认完成，支持已处理、并非卡住、稍后提醒与返回来源会话。\n- **精准优先的卡住判断**：只在重复失败或重复操作序列满足严格规则时提示，并保留判断证据和用户反馈。\n- **系统提醒与质量门槛**：提醒在系统确认投递后才记为已发送，并持续记录误报、漏报和响应延迟样本。\n- **更多本机来源证据**：统一 Claude Code、Codex、Kimi Code、ZCode、Cursor、OpenClaw 与 Hermes 的来源能力口径；ZCode 现在也会出现在数据页筛选中。\n\n### 隐私与可靠性\n\n- 实时与历史记录统一进入可追踪的规范证据链，旧数据库通过分阶段迁移、校验和回滚安全升级。\n- 原始实时信封默认不保留；用户主动开启诊断时，才会在本机加密保留七天，并可随时提前清除。\n- 加固隐私裁剪、幂等重索引、乱序事件重放、来源不可用状态和本地数据清除。\n- 修复重复启动时崩溃或空白窗口、数据页切换卡住、注意力历史轮询随数据增长变慢，以及迁移恢复后启动失败。\n\n### 界面改进\n\n- 收紧 Notch 关注卡片排版，移除重复标题，并让“已处理”保持单行。\n- 完善注意力历史分页、跳回失败提示和不可用状态展示。\n\n### 安装说明\n\n- 需要 macOS 14 或更高版本。\n- 下载与你的 Mac 匹配的 Apple Silicon 或 Intel DMG/ZIP。\n- 当前构建采用 ad-hoc 签名，尚未经过 Apple 公证；首次打开时可能需要在“隐私与安全性”中手动允许。"
+      "markdown": "VibeMeter 0.3.1 让 VCTI 从一个人格结论，变成一份可以读懂、核对和分享的本机行为画像。\n\n### 新增\n\n- **VCTI 身份证据**：在保留原有二十四款人物图的基础上，补充工作节奏、协作方式、工具与 Skill 多样性，以及错误、重试和回滚等过程证据。\n- **证据覆盖说明**：明确显示哪些行为已经记录、哪些来源能力不足；缺失数据不会被当成零，也不会用模拟值补齐。\n- **一致的身份卡**：VCTI 页面与现有分享卡使用同一人物图、时间范围、来源筛选和证据口径，预览、SVG 与 PNG 保持一致。\n- **更自然的呈现**：首次显示或切换范围时加入生成动效，同时完整支持系统“减少动态效果”设置。\n\n### 修复与改进\n\n- VCTI 及身份卡现在严格跟随全局时间范围和已启用的数据来源。\n- 保留原有 VCTI 人物图，不再让新增证据视觉替换或改画角色。\n- 注意力卡片加入经过隐私裁剪的会话标题，同一项目下的多个完成项更容易区分。\n- 加强中英文、明暗主题、分享比例、确定性输出与隐私拦截的发布门禁。\n\n### 安装说明\n\n- 需要 macOS 14 或更高版本。\n- 下载与你的 Mac 匹配的 Apple Silicon 或 Intel DMG/ZIP。\n- 当前构建采用 ad-hoc 签名，尚未经过 Apple 公证；首次打开时可能需要在“隐私与安全性”中手动允许。"
     },
     "en": {
       "source": "localized",
-      "markdown": "VibeMeter 0.3.0 not only shows what an agent is doing, but also explains when your attention may be useful. This release rebuilds the live and historical evidence pipeline that supports those decisions.\n\n### New\n\n- **Work Pulse** separates lifecycle, work phase, attention signal, and freshness instead of collapsing them into one status.\n- **Attention Queue** brings requests for your attention, blocking errors, suspected stalls, and completion review to Live and the Notch, with handled, not-stuck, snooze, and jump-back actions.\n- **Precision-first stall detection** only raises a signal after strict repeated-failure or repeated-operation rules are satisfied, while retaining evidence and user feedback.\n- **Notification quality gates** count a notification only after confirmed system delivery and track false positives, misses, and response latency.\n- **Broader local evidence coverage** unifies capability language across Claude Code, Codex, Kimi Code, ZCode, Cursor, OpenClaw, and Hermes. ZCode is now available in Data filters as well.\n\n### Privacy and reliability\n\n- Live and historical records now feed one versioned canonical evidence chain, with staged, verified, and recoverable database migrations.\n- Raw live envelopes remain off by default. When diagnostic retention is explicitly enabled, they are encrypted locally for seven days and can be cleared early.\n- Hardened privacy redaction, idempotent re-indexing, out-of-order event replay, honest unavailable states, and local-data cleanup.\n- Fixed repeated-launch crashes or blank windows, Data-page stalls, attention polling that slowed as history grew, and startup failures after recovered migrations.\n\n### Interface improvements\n\n- Tightened Notch attention cards, removed the repeated heading, and kept the handled action on one line.\n- Added real attention-history pagination, visible jump-back failures, and explicit unavailable states.\n\n### Installation\n\n- Requires macOS 14 or later.\n- Download the Apple Silicon or Intel DMG/ZIP that matches your Mac.\n- Builds are ad-hoc signed and are not Apple-notarized yet. macOS may require manual approval in Privacy & Security on first launch."
+      "markdown": "VibeMeter 0.3.1 turns VCTI from a persona result into a local behavior profile you can understand, verify, and share.\n\n### New\n\n- **VCTI identity evidence** keeps the original 24 character illustrations and adds recorded work rhythm, collaboration patterns, tool and Skill diversity, plus process evidence such as errors, retries, and rollbacks.\n- **Evidence coverage** shows which behaviors were recorded and where source capabilities are limited. Missing data is never converted to zero or filled with simulated values.\n- **Consistent identity cards** use the same character, time range, source selection, and evidence model across VCTI and the existing share card, with one render model for preview, SVG, and PNG.\n- **Accessible presentation** adds a generation animation on first reveal or range changes while fully respecting the system Reduce Motion setting.\n\n### Fixes and improvements\n\n- VCTI and identity cards now follow the global time range and enabled data sources consistently.\n- The original VCTI character art remains intact instead of being replaced or redrawn by the new evidence presentation.\n- Attention cards now include the privacy-sanitized session title, making completion items from the same project easier to distinguish.\n- Expanded release gates for both languages, light and dark themes, share ratios, deterministic output, and privacy protection.\n\n### Installation\n\n- Requires macOS 14 or later.\n- Download the Apple Silicon or Intel DMG/ZIP that matches your Mac.\n- Builds are ad-hoc signed and are not Apple-notarized yet. macOS may require manual approval in Privacy & Security on first launch."
     }
   },
   "assets": {
-    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.0/VibeMeter_0.3.0_macOS_aarch64.dmg",
-    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.0/VibeMeter_v0.3.0_macOS_arm64.zip",
-    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.0/VibeMeter_0.3.0_macOS_x64.dmg",
-    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.0/VibeMeter_v0.3.0_macOS_x64.zip"
+    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.1/VibeMeter_0.3.1_macOS_aarch64.dmg",
+    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.1/VibeMeter_v0.3.1_macOS_arm64.zip",
+    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.1/VibeMeter_0.3.1_macOS_x64.dmg",
+    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.1/VibeMeter_v0.3.1_macOS_x64.zip"
   },
   "releases": [
+    {
+      "sourceRepo": "RangeKing/vibemeter",
+      "version": "v0.3.1",
+      "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.3.1",
+      "publishedAt": "2026-08-13T05:07:46Z",
+      "releaseUpdatedAt": "2026-08-13T05:10:17Z",
+      "notes": {
+        "zh-CN": {
+          "source": "localized",
+          "markdown": "VibeMeter 0.3.1 让 VCTI 从一个人格结论，变成一份可以读懂、核对和分享的本机行为画像。\n\n### 新增\n\n- **VCTI 身份证据**：在保留原有二十四款人物图的基础上，补充工作节奏、协作方式、工具与 Skill 多样性，以及错误、重试和回滚等过程证据。\n- **证据覆盖说明**：明确显示哪些行为已经记录、哪些来源能力不足；缺失数据不会被当成零，也不会用模拟值补齐。\n- **一致的身份卡**：VCTI 页面与现有分享卡使用同一人物图、时间范围、来源筛选和证据口径，预览、SVG 与 PNG 保持一致。\n- **更自然的呈现**：首次显示或切换范围时加入生成动效，同时完整支持系统“减少动态效果”设置。\n\n### 修复与改进\n\n- VCTI 及身份卡现在严格跟随全局时间范围和已启用的数据来源。\n- 保留原有 VCTI 人物图，不再让新增证据视觉替换或改画角色。\n- 注意力卡片加入经过隐私裁剪的会话标题，同一项目下的多个完成项更容易区分。\n- 加强中英文、明暗主题、分享比例、确定性输出与隐私拦截的发布门禁。\n\n### 安装说明\n\n- 需要 macOS 14 或更高版本。\n- 下载与你的 Mac 匹配的 Apple Silicon 或 Intel DMG/ZIP。\n- 当前构建采用 ad-hoc 签名，尚未经过 Apple 公证；首次打开时可能需要在“隐私与安全性”中手动允许。"
+        },
+        "en": {
+          "source": "localized",
+          "markdown": "VibeMeter 0.3.1 turns VCTI from a persona result into a local behavior profile you can understand, verify, and share.\n\n### New\n\n- **VCTI identity evidence** keeps the original 24 character illustrations and adds recorded work rhythm, collaboration patterns, tool and Skill diversity, plus process evidence such as errors, retries, and rollbacks.\n- **Evidence coverage** shows which behaviors were recorded and where source capabilities are limited. Missing data is never converted to zero or filled with simulated values.\n- **Consistent identity cards** use the same character, time range, source selection, and evidence model across VCTI and the existing share card, with one render model for preview, SVG, and PNG.\n- **Accessible presentation** adds a generation animation on first reveal or range changes while fully respecting the system Reduce Motion setting.\n\n### Fixes and improvements\n\n- VCTI and identity cards now follow the global time range and enabled data sources consistently.\n- The original VCTI character art remains intact instead of being replaced or redrawn by the new evidence presentation.\n- Attention cards now include the privacy-sanitized session title, making completion items from the same project easier to distinguish.\n- Expanded release gates for both languages, light and dark themes, share ratios, deterministic output, and privacy protection.\n\n### Installation\n\n- Requires macOS 14 or later.\n- Download the Apple Silicon or Intel DMG/ZIP that matches your Mac.\n- Builds are ad-hoc signed and are not Apple-notarized yet. macOS may require manual approval in Privacy & Security on first launch."
+        }
+      }
+    },
     {
       "sourceRepo": "RangeKing/vibemeter",
       "version": "v0.3.0",
