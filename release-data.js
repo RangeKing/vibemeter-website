@@ -2,27 +2,44 @@
 window.VibeMeterReleaseData = {
   "schemaVersion": 2,
   "sourceRepo": "RangeKing/vibemeter",
-  "version": "v0.3.1",
-  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.3.1",
-  "publishedAt": "2026-08-13T05:07:46Z",
-  "releaseUpdatedAt": "2026-08-13T05:10:17Z",
+  "version": "v0.3.2",
+  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.3.2",
+  "publishedAt": "2026-08-14T14:29:30Z",
+  "releaseUpdatedAt": "2026-08-14T14:31:51Z",
   "notes": {
     "zh-CN": {
       "source": "localized",
-      "markdown": "VibeMeter 0.3.1 让 VCTI 从一个人格结论，变成一份可以读懂、核对和分享的本机行为画像。\n\n### 新增\n\n- **VCTI 身份证据**：在保留原有二十四款人物图的基础上，补充工作节奏、协作方式、工具与 Skill 多样性，以及错误、重试和回滚等过程证据。\n- **证据覆盖说明**：明确显示哪些行为已经记录、哪些来源能力不足；缺失数据不会被当成零，也不会用模拟值补齐。\n- **一致的身份卡**：VCTI 页面与现有分享卡使用同一人物图、时间范围、来源筛选和证据口径，预览、SVG 与 PNG 保持一致。\n- **更自然的呈现**：首次显示或切换范围时加入生成动效，同时完整支持系统“减少动态效果”设置。\n\n### 修复与改进\n\n- VCTI 及身份卡现在严格跟随全局时间范围和已启用的数据来源。\n- 保留原有 VCTI 人物图，不再让新增证据视觉替换或改画角色。\n- 注意力卡片加入经过隐私裁剪的会话标题，同一项目下的多个完成项更容易区分。\n- 加强中英文、明暗主题、分享比例、确定性输出与隐私拦截的发布门禁。\n\n### 安装说明\n\n- 需要 macOS 14 或更高版本。\n- 下载与你的 Mac 匹配的 Apple Silicon 或 Intel DMG/ZIP。\n- 当前构建采用 ad-hoc 签名，尚未经过 Apple 公证；首次打开时可能需要在“隐私与安全性”中手动允许。"
+      "markdown": "VibeMeter 0.3.2 把“会话”从数据页中的明细入口独立出来，让一次 Agent 工作过程更容易筛选、展开和回看。\n\n### 新增\n\n- **独立会话页**：会话与回放现在拥有单独的导航入口，支持按时间范围、Agent、模型、项目、验证状态、注意力信号、代码修改和提交筛选，并可继续加载更早记录。\n- **会话轨迹总览**：将一次会话拆成阶段轨道，以及输入、Agent、工具三条过程线；时间证据可用时按真实时长呈现，否则使用稳定的事件顺序。异常事件和密集阶段可以直接定位、展开。\n- **按需内容预览**：支持的来源可在会话回放中显示用户输入与 Agent 输出。预览仅在打开详情时从原始本机来源读取，不会在 VibeMeter 数据库中保存副本，也不会进入 Notch、通知或分享卡。\n- **可选系统代理**：设置页新增 macOS 系统代理开关，仅用于提供商额度与状态请求。该功能默认关闭，VibeMeter 不会修改系统代理设置。\n\n### 修复与改进\n\n- 已完成的会话重新开始工作后，旧的完成复核会自动解决，不再继续占用注意力队列。\n- Notch 中存在多个待确认完成项时，可以一次确认当前可见项目。\n- 数据页聚焦长期统计和工作事件，会话台账与回放统一移入独立会话页。\n\n### 安装说明\n\n- 需要 macOS 14 或更高版本。\n- 下载与你的 Mac 匹配的 Apple Silicon 或 Intel DMG/ZIP。\n- 当前构建采用 ad-hoc 签名，尚未经过 Apple 公证；首次打开时可能需要在“隐私与安全性”中手动允许。"
     },
     "en": {
       "source": "localized",
-      "markdown": "VibeMeter 0.3.1 turns VCTI from a persona result into a local behavior profile you can understand, verify, and share.\n\n### New\n\n- **VCTI identity evidence** keeps the original 24 character illustrations and adds recorded work rhythm, collaboration patterns, tool and Skill diversity, plus process evidence such as errors, retries, and rollbacks.\n- **Evidence coverage** shows which behaviors were recorded and where source capabilities are limited. Missing data is never converted to zero or filled with simulated values.\n- **Consistent identity cards** use the same character, time range, source selection, and evidence model across VCTI and the existing share card, with one render model for preview, SVG, and PNG.\n- **Accessible presentation** adds a generation animation on first reveal or range changes while fully respecting the system Reduce Motion setting.\n\n### Fixes and improvements\n\n- VCTI and identity cards now follow the global time range and enabled data sources consistently.\n- The original VCTI character art remains intact instead of being replaced or redrawn by the new evidence presentation.\n- Attention cards now include the privacy-sanitized session title, making completion items from the same project easier to distinguish.\n- Expanded release gates for both languages, light and dark themes, share ratios, deterministic output, and privacy protection.\n\n### Installation\n\n- Requires macOS 14 or later.\n- Download the Apple Silicon or Intel DMG/ZIP that matches your Mac.\n- Builds are ad-hoc signed and are not Apple-notarized yet. macOS may require manual approval in Privacy & Security on first launch."
+      "markdown": "VibeMeter 0.3.2 moves Sessions out of the Data drill-down and into a dedicated workspace, making each agent run easier to filter, expand, and review.\n\n### New\n\n- **Dedicated Sessions page** adds a first-class navigation entry for sessions and replay, with filters for time range, agent, model, project, verification state, attention signals, code changes, and commits, plus pagination for older records.\n- **Session trajectory overview** maps each run into a phase rail and separate Input, Agent, and Tools lanes. It uses observed duration when timestamps are available and a stable event sequence otherwise, with direct access to issues and dense phases.\n- **On-demand content previews** show user input and agent output for supported sources. VibeMeter reads the preview from the original local source only when session details are opened, stores no preview copy in its database, and keeps it out of the Notch, notifications, and share cards.\n- **Optional system proxy support** lets provider quota and status requests use the active macOS system proxy. It is off by default, and VibeMeter never changes the system proxy configuration.\n\n### Fixes and improvements\n\n- When a completed session starts working again, its old completion review is resolved instead of remaining in the attention queue.\n- Multiple visible completion reviews in the Notch can now be confirmed together.\n- Data stays focused on long-term analytics and work events, while the session ledger and replay now live on the dedicated Sessions page.\n\n### Installation\n\n- Requires macOS 14 or later.\n- Download the Apple Silicon or Intel DMG/ZIP that matches your Mac.\n- Builds are ad-hoc signed and are not Apple-notarized yet. macOS may require manual approval in Privacy & Security on first launch."
     }
   },
   "assets": {
-    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.1/VibeMeter_0.3.1_macOS_aarch64.dmg",
-    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.1/VibeMeter_v0.3.1_macOS_arm64.zip",
-    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.1/VibeMeter_0.3.1_macOS_x64.dmg",
-    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.1/VibeMeter_v0.3.1_macOS_x64.zip"
+    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.2/VibeMeter_0.3.2_macOS_aarch64.dmg",
+    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.2/VibeMeter_v0.3.2_macOS_arm64.zip",
+    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.2/VibeMeter_0.3.2_macOS_x64.dmg",
+    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.2/VibeMeter_v0.3.2_macOS_x64.zip"
   },
   "releases": [
+    {
+      "sourceRepo": "RangeKing/vibemeter",
+      "version": "v0.3.2",
+      "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.3.2",
+      "publishedAt": "2026-08-14T14:29:30Z",
+      "releaseUpdatedAt": "2026-08-14T14:31:51Z",
+      "notes": {
+        "zh-CN": {
+          "source": "localized",
+          "markdown": "VibeMeter 0.3.2 把“会话”从数据页中的明细入口独立出来，让一次 Agent 工作过程更容易筛选、展开和回看。\n\n### 新增\n\n- **独立会话页**：会话与回放现在拥有单独的导航入口，支持按时间范围、Agent、模型、项目、验证状态、注意力信号、代码修改和提交筛选，并可继续加载更早记录。\n- **会话轨迹总览**：将一次会话拆成阶段轨道，以及输入、Agent、工具三条过程线；时间证据可用时按真实时长呈现，否则使用稳定的事件顺序。异常事件和密集阶段可以直接定位、展开。\n- **按需内容预览**：支持的来源可在会话回放中显示用户输入与 Agent 输出。预览仅在打开详情时从原始本机来源读取，不会在 VibeMeter 数据库中保存副本，也不会进入 Notch、通知或分享卡。\n- **可选系统代理**：设置页新增 macOS 系统代理开关，仅用于提供商额度与状态请求。该功能默认关闭，VibeMeter 不会修改系统代理设置。\n\n### 修复与改进\n\n- 已完成的会话重新开始工作后，旧的完成复核会自动解决，不再继续占用注意力队列。\n- Notch 中存在多个待确认完成项时，可以一次确认当前可见项目。\n- 数据页聚焦长期统计和工作事件，会话台账与回放统一移入独立会话页。\n\n### 安装说明\n\n- 需要 macOS 14 或更高版本。\n- 下载与你的 Mac 匹配的 Apple Silicon 或 Intel DMG/ZIP。\n- 当前构建采用 ad-hoc 签名，尚未经过 Apple 公证；首次打开时可能需要在“隐私与安全性”中手动允许。"
+        },
+        "en": {
+          "source": "localized",
+          "markdown": "VibeMeter 0.3.2 moves Sessions out of the Data drill-down and into a dedicated workspace, making each agent run easier to filter, expand, and review.\n\n### New\n\n- **Dedicated Sessions page** adds a first-class navigation entry for sessions and replay, with filters for time range, agent, model, project, verification state, attention signals, code changes, and commits, plus pagination for older records.\n- **Session trajectory overview** maps each run into a phase rail and separate Input, Agent, and Tools lanes. It uses observed duration when timestamps are available and a stable event sequence otherwise, with direct access to issues and dense phases.\n- **On-demand content previews** show user input and agent output for supported sources. VibeMeter reads the preview from the original local source only when session details are opened, stores no preview copy in its database, and keeps it out of the Notch, notifications, and share cards.\n- **Optional system proxy support** lets provider quota and status requests use the active macOS system proxy. It is off by default, and VibeMeter never changes the system proxy configuration.\n\n### Fixes and improvements\n\n- When a completed session starts working again, its old completion review is resolved instead of remaining in the attention queue.\n- Multiple visible completion reviews in the Notch can now be confirmed together.\n- Data stays focused on long-term analytics and work events, while the session ledger and replay now live on the dedicated Sessions page.\n\n### Installation\n\n- Requires macOS 14 or later.\n- Download the Apple Silicon or Intel DMG/ZIP that matches your Mac.\n- Builds are ad-hoc signed and are not Apple-notarized yet. macOS may require manual approval in Privacy & Security on first launch."
+        }
+      }
+    },
     {
       "sourceRepo": "RangeKing/vibemeter",
       "version": "v0.3.1",
