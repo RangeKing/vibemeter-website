@@ -2,27 +2,44 @@
 window.VibeMeterReleaseData = {
   "schemaVersion": 2,
   "sourceRepo": "RangeKing/vibemeter",
-  "version": "v0.3.2",
-  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.3.2",
-  "publishedAt": "2026-08-14T14:29:30Z",
-  "releaseUpdatedAt": "2026-08-14T14:31:51Z",
+  "version": "v0.4.0",
+  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.4.0",
+  "publishedAt": "2026-08-16T12:27:57Z",
+  "releaseUpdatedAt": "2026-08-16T12:30:24Z",
   "notes": {
     "zh-CN": {
       "source": "localized",
-      "markdown": "VibeMeter 0.3.2 把“会话”从数据页中的明细入口独立出来，让一次 Agent 工作过程更容易筛选、展开和回看。\n\n### 新增\n\n- **独立会话页**：会话与回放现在拥有单独的导航入口，支持按时间范围、Agent、模型、项目、验证状态、注意力信号、代码修改和提交筛选，并可继续加载更早记录。\n- **会话轨迹总览**：将一次会话拆成阶段轨道，以及输入、Agent、工具三条过程线；时间证据可用时按真实时长呈现，否则使用稳定的事件顺序。异常事件和密集阶段可以直接定位、展开。\n- **按需内容预览**：支持的来源可在会话回放中显示用户输入与 Agent 输出。预览仅在打开详情时从原始本机来源读取，不会在 VibeMeter 数据库中保存副本，也不会进入 Notch、通知或分享卡。\n- **可选系统代理**：设置页新增 macOS 系统代理开关，仅用于提供商额度与状态请求。该功能默认关闭，VibeMeter 不会修改系统代理设置。\n\n### 修复与改进\n\n- 已完成的会话重新开始工作后，旧的完成复核会自动解决，不再继续占用注意力队列。\n- Notch 中存在多个待确认完成项时，可以一次确认当前可见项目。\n- 数据页聚焦长期统计和工作事件，会话台账与回放统一移入独立会话页。\n\n### 安装说明\n\n- 需要 macOS 14 或更高版本。\n- 下载与你的 Mac 匹配的 Apple Silicon 或 Intel DMG/ZIP。\n- 当前构建采用 ad-hoc 签名，尚未经过 Apple 公证；首次打开时可能需要在“隐私与安全性”中手动允许。"
+      "markdown": "VibeMeter 0.4.0 扩展了本机 Agent 观察范围，并让数据入口、实时状态和会话回看更贴近日常使用。\n\n### 新增\n\n- **DeepSeek Harness 完整接入**：只读解析本机结构化会话记录，支持历史分析、精确实时生命周期、轨迹回放、来源状态和跳回入口。VibeMeter 不安装 Hook，也不会修改 Harness 配置或会话。\n- **Kimi Code 与 ZCode 精确实时状态**：两类来源现在进入完整历史与实时生命周期管线，可显示等待、错误、运行和完成等状态，并参与 Data、回放、VCTI、分享与来源状态。\n- **统一 Agent 图标**：主界面、来源页和 Notch 使用一致的提供商图标，并补充 ZCode 资源与多会话计数显示。\n\n### 修复与改进\n\n- ZCode 会合并快照、任务索引、模型输入输出日志和新版 CLI 数据库中的同一会话，优先采用最新且更完整的状态；会话标题也能在可用时保留。\n- ZCode 用户输入采用稳定位置与指纹去重，重建索引时不会把旧提示词误当成新的实时输入。\n- Data 现在是默认首页；Sources 增加返回设置页的入口，来源权限变化会触发相应的历史索引刷新。\n- 调整 Agent 图表配色与工具图表留白，改善数值和标签的可读性；会话轨迹增加即时悬停与键盘焦点提示。\n- 移除 Data 中独立的 Cursor 账户用量面板，继续保持账户级数据与本机历史、回放和 VCTI 分离。\n- Notch 与 Live 不再显示完成复核操作，关注列表聚焦仍需处理的等待、错误和高置信卡住状态。\n- 改进关闭状态下的本机回环代理识别，并更新前端与 Rust 依赖。\n\n### 安装说明\n\n- 需要 macOS 14 或更高版本。\n- 下载与你的 Mac 匹配的 Apple Silicon 或 Intel DMG/ZIP。\n- 当前构建采用 ad-hoc 签名，尚未经过 Apple 公证；首次打开时可能需要在“隐私与安全性”中手动允许。"
     },
     "en": {
       "source": "localized",
-      "markdown": "VibeMeter 0.3.2 moves Sessions out of the Data drill-down and into a dedicated workspace, making each agent run easier to filter, expand, and review.\n\n### New\n\n- **Dedicated Sessions page** adds a first-class navigation entry for sessions and replay, with filters for time range, agent, model, project, verification state, attention signals, code changes, and commits, plus pagination for older records.\n- **Session trajectory overview** maps each run into a phase rail and separate Input, Agent, and Tools lanes. It uses observed duration when timestamps are available and a stable event sequence otherwise, with direct access to issues and dense phases.\n- **On-demand content previews** show user input and agent output for supported sources. VibeMeter reads the preview from the original local source only when session details are opened, stores no preview copy in its database, and keeps it out of the Notch, notifications, and share cards.\n- **Optional system proxy support** lets provider quota and status requests use the active macOS system proxy. It is off by default, and VibeMeter never changes the system proxy configuration.\n\n### Fixes and improvements\n\n- When a completed session starts working again, its old completion review is resolved instead of remaining in the attention queue.\n- Multiple visible completion reviews in the Notch can now be confirmed together.\n- Data stays focused on long-term analytics and work events, while the session ledger and replay now live on the dedicated Sessions page.\n\n### Installation\n\n- Requires macOS 14 or later.\n- Download the Apple Silicon or Intel DMG/ZIP that matches your Mac.\n- Builds are ad-hoc signed and are not Apple-notarized yet. macOS may require manual approval in Privacy & Security on first launch."
+      "markdown": "VibeMeter 0.4.0 expands local agent coverage and makes the Data entry point, live status, and session review fit everyday use more closely.\n\n### New\n\n- **Full DeepSeek Harness integration** read-only parses local structured session records for historical analytics, exact live lifecycle status, trajectory replay, source health, and a validated jump-back entry. VibeMeter installs no hook and never changes Harness configuration or sessions.\n- **Exact Kimi Code and ZCode live status** moves both sources into the full history and lifecycle pipeline, including waiting, error, running, and completion states across Data, replay, VCTI, sharing, and source status.\n- **Unified agent icons** bring consistent provider marks to the main app, Sources, and the Notch, including a dedicated ZCode asset and multi-session counts.\n\n### Fixes and improvements\n\n- ZCode now merges matching sessions from snapshots, task indexes, model I/O logs, and the newer CLI database, preferring the freshest and most complete state. Available conversation titles are preserved.\n- Stable position and fingerprint tracking prevents old ZCode prompts from being replayed as new live input during reindexing.\n- Data is now the default home page. Sources has a direct path back to Settings, and history indexes refresh when source permissions change.\n- Refreshed agent chart colors, wider tool-chart spacing, and immediate hover and keyboard-focus tooltips improve chart and session-trajectory readability.\n- The separate Cursor account-usage panel has been removed from Data, keeping account-level data separate from local history, replay, and VCTI.\n- The Notch and Live no longer show completion-review actions, keeping attention surfaces focused on waiting, errors, and high-confidence stuck states that still need attention.\n- Loopback proxy detection now handles disabled local proxy entries more safely, alongside routine frontend and Rust dependency updates.\n\n### Installation\n\n- Requires macOS 14 or later.\n- Download the Apple Silicon or Intel DMG/ZIP that matches your Mac.\n- Builds are ad-hoc signed and are not Apple-notarized yet. macOS may require manual approval in Privacy & Security on first launch."
     }
   },
   "assets": {
-    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.2/VibeMeter_0.3.2_macOS_aarch64.dmg",
-    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.2/VibeMeter_v0.3.2_macOS_arm64.zip",
-    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.2/VibeMeter_0.3.2_macOS_x64.dmg",
-    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.3.2/VibeMeter_v0.3.2_macOS_x64.zip"
+    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.0/VibeMeter_0.4.0_macOS_aarch64.dmg",
+    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.0/VibeMeter_v0.4.0_macOS_arm64.zip",
+    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.0/VibeMeter_0.4.0_macOS_x64.dmg",
+    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.0/VibeMeter_v0.4.0_macOS_x64.zip"
   },
   "releases": [
+    {
+      "sourceRepo": "RangeKing/vibemeter",
+      "version": "v0.4.0",
+      "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.4.0",
+      "publishedAt": "2026-08-16T12:27:57Z",
+      "releaseUpdatedAt": "2026-08-16T12:30:24Z",
+      "notes": {
+        "zh-CN": {
+          "source": "localized",
+          "markdown": "VibeMeter 0.4.0 扩展了本机 Agent 观察范围，并让数据入口、实时状态和会话回看更贴近日常使用。\n\n### 新增\n\n- **DeepSeek Harness 完整接入**：只读解析本机结构化会话记录，支持历史分析、精确实时生命周期、轨迹回放、来源状态和跳回入口。VibeMeter 不安装 Hook，也不会修改 Harness 配置或会话。\n- **Kimi Code 与 ZCode 精确实时状态**：两类来源现在进入完整历史与实时生命周期管线，可显示等待、错误、运行和完成等状态，并参与 Data、回放、VCTI、分享与来源状态。\n- **统一 Agent 图标**：主界面、来源页和 Notch 使用一致的提供商图标，并补充 ZCode 资源与多会话计数显示。\n\n### 修复与改进\n\n- ZCode 会合并快照、任务索引、模型输入输出日志和新版 CLI 数据库中的同一会话，优先采用最新且更完整的状态；会话标题也能在可用时保留。\n- ZCode 用户输入采用稳定位置与指纹去重，重建索引时不会把旧提示词误当成新的实时输入。\n- Data 现在是默认首页；Sources 增加返回设置页的入口，来源权限变化会触发相应的历史索引刷新。\n- 调整 Agent 图表配色与工具图表留白，改善数值和标签的可读性；会话轨迹增加即时悬停与键盘焦点提示。\n- 移除 Data 中独立的 Cursor 账户用量面板，继续保持账户级数据与本机历史、回放和 VCTI 分离。\n- Notch 与 Live 不再显示完成复核操作，关注列表聚焦仍需处理的等待、错误和高置信卡住状态。\n- 改进关闭状态下的本机回环代理识别，并更新前端与 Rust 依赖。\n\n### 安装说明\n\n- 需要 macOS 14 或更高版本。\n- 下载与你的 Mac 匹配的 Apple Silicon 或 Intel DMG/ZIP。\n- 当前构建采用 ad-hoc 签名，尚未经过 Apple 公证；首次打开时可能需要在“隐私与安全性”中手动允许。"
+        },
+        "en": {
+          "source": "localized",
+          "markdown": "VibeMeter 0.4.0 expands local agent coverage and makes the Data entry point, live status, and session review fit everyday use more closely.\n\n### New\n\n- **Full DeepSeek Harness integration** read-only parses local structured session records for historical analytics, exact live lifecycle status, trajectory replay, source health, and a validated jump-back entry. VibeMeter installs no hook and never changes Harness configuration or sessions.\n- **Exact Kimi Code and ZCode live status** moves both sources into the full history and lifecycle pipeline, including waiting, error, running, and completion states across Data, replay, VCTI, sharing, and source status.\n- **Unified agent icons** bring consistent provider marks to the main app, Sources, and the Notch, including a dedicated ZCode asset and multi-session counts.\n\n### Fixes and improvements\n\n- ZCode now merges matching sessions from snapshots, task indexes, model I/O logs, and the newer CLI database, preferring the freshest and most complete state. Available conversation titles are preserved.\n- Stable position and fingerprint tracking prevents old ZCode prompts from being replayed as new live input during reindexing.\n- Data is now the default home page. Sources has a direct path back to Settings, and history indexes refresh when source permissions change.\n- Refreshed agent chart colors, wider tool-chart spacing, and immediate hover and keyboard-focus tooltips improve chart and session-trajectory readability.\n- The separate Cursor account-usage panel has been removed from Data, keeping account-level data separate from local history, replay, and VCTI.\n- The Notch and Live no longer show completion-review actions, keeping attention surfaces focused on waiting, errors, and high-confidence stuck states that still need attention.\n- Loopback proxy detection now handles disabled local proxy entries more safely, alongside routine frontend and Rust dependency updates.\n\n### Installation\n\n- Requires macOS 14 or later.\n- Download the Apple Silicon or Intel DMG/ZIP that matches your Mac.\n- Builds are ad-hoc signed and are not Apple-notarized yet. macOS may require manual approval in Privacy & Security on first launch."
+        }
+      }
+    },
     {
       "sourceRepo": "RangeKing/vibemeter",
       "version": "v0.3.2",
