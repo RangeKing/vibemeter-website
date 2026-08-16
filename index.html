@@ -6,7 +6,7 @@
     <title>VibeMeter — Your coding agents, at a glance</title>
     <meta
       name="description"
-      content="Track Claude Code and Codex live, review readable local usage over time, and see your VCTI profile—all on your Mac."
+      content="Track five coding agents live, review each session as a clear trajectory, and see your VCTI profile—all on your Mac."
     />
     <meta name="theme-color" content="#100d10" />
     <meta name="cloudflare-web-analytics-token" content="" />
@@ -73,7 +73,7 @@
     </style>
     <link rel="stylesheet" href="./site-utilities.css?v=1" />
     <link rel="stylesheet" href="./site.css?v=4" />
-    <link rel="stylesheet" href="./vibemeter.css?v=12" />
+    <link rel="stylesheet" href="./vibemeter.css?v=13" />
   </head>
 
   <body class="min-h-screen overflow-x-hidden text-zinc-100">
@@ -197,7 +197,7 @@
                 <span class="hero-title-line hero-title-accent" data-i18n="hero.accent">Understand how you work together.</span>
               </h1>
               <p class="reveal reveal-3 mt-6 max-w-[39rem] text-balance text-[clamp(1rem,1.25vw,1.28rem)] leading-[1.48] tracking-[-0.035em] text-zinc-400" data-i18n="hero.description">
-                Track Claude Code and Codex live. Review readable local sessions as usage trends, share cards, and a VCTI profile.
+                Track Claude Code, Codex, DeepSeek Harness, Kimi Code, and ZCode live. Review each local session as a clear trajectory.
               </p>
               <div class="hero-cta-row reveal reveal-4 mt-8 sm:mt-10">
                 <div class="release-download-grid release-download-grid--hero">
@@ -236,15 +236,17 @@
         <div class="section-inner">
           <p class="section-eyebrow provider-reveal" data-i18n="agents.eyebrow">Agent coverage</p>
           <h2 class="provider-reveal max-w-4xl text-balance text-[clamp(2.4rem,4.4vw,5rem)] font-semibold leading-[0.98] tracking-[-0.07em] text-zinc-100" data-i18n-rich="agents.title">
-            Live status for Claude Code and Codex.{mobileBreak}History for every readable source.
+            Five agents, live and in context.{mobileBreak}Eight sources in one local history.
           </h2>
           <p class="provider-reveal mt-6 max-w-[47rem] text-balance text-lg leading-relaxed text-zinc-400" style="--reveal-delay: 60ms" data-i18n="agents.description">
-            Claude Code and Codex provide precise live status. Kimi Code, Cursor, OpenClaw, and Hermes appear in history only when readable local records are available.
+            Claude Code, Codex, DeepSeek Harness, Kimi Code, and ZCode provide precise live status and complete local history. Cursor, OpenClaw, and Hermes join the history wherever readable records are available.
           </p>
-          <ul class="mt-12 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
+          <ul class="mt-12 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-8">
             <li class="provider-card"><div class="provider-card-link"><span class="provider-logo"><img src="./logos/claude.svg" alt="" /></span><p><strong>Claude Code</strong><span data-i18n="agents.liveHistory">Live + history</span></p></div></li>
             <li class="provider-card"><div class="provider-card-link"><span class="provider-logo"><img src="./logos/codex.svg" alt="" /></span><p><strong>Codex</strong><span data-i18n="agents.liveHistory">Live + history</span></p></div></li>
-            <li class="provider-card"><div class="provider-card-link"><span class="provider-logo"><img src="./logos/kimi.svg" alt="" /></span><p><strong>Kimi Code</strong><span data-i18n="agents.historyOnly">History when available</span></p></div></li>
+            <li class="provider-card"><div class="provider-card-link"><span class="provider-logo"><img src="./logos/deepseek.svg" alt="" /></span><p><strong>DeepSeek Harness</strong><span data-i18n="agents.liveHistory">Live + history</span></p></div></li>
+            <li class="provider-card"><div class="provider-card-link"><span class="provider-logo"><img src="./logos/kimi.svg" alt="" /></span><p><strong>Kimi Code</strong><span data-i18n="agents.liveHistory">Live + history</span></p></div></li>
+            <li class="provider-card"><div class="provider-card-link"><span class="provider-logo"><img src="./logos/zcode.svg" alt="" /></span><p><strong>ZCode</strong><span data-i18n="agents.liveHistory">Live + history</span></p></div></li>
             <li class="provider-card"><div class="provider-card-link"><span class="provider-logo"><img src="./logos/cursor.svg" alt="" /></span><p><strong>Cursor</strong><span data-i18n="agents.historyOnly">History when available</span></p></div></li>
             <li class="provider-card"><div class="provider-card-link"><span class="provider-logo provider-logo--app-icon"><img src="./logos/openclaw.png" alt="" /></span><p><strong>OpenClaw</strong><span data-i18n="agents.historyOnly">History when available</span></p></div></li>
             <li class="provider-card"><div class="provider-card-link"><span class="provider-logo provider-logo--app-icon"><img src="./logos/hermes.png" alt="" /></span><p><strong>Hermes</strong><span data-i18n="agents.historyOnly">History when available</span></p></div></li>
@@ -268,6 +270,30 @@
             <article class="feature-card provider-reveal" style="--reveal-delay: 200ms">
               <div class="feature-card-copy"><h3 data-i18n="features.vctiTitle">See your AI coding habits clearly</h3><p data-i18n="features.vctiBody">VCTI looks at how you start, delegate, verify, debug, and finish, then shows the closest profile with confidence and evidence.</p></div>
               <div class="feature-card-visual feature-shot feature-shot--vcti"><img src="./assets/screenshots/vibemeter-current.png" alt="VibeMeter VCTI page" data-i18n-alt="features.vctiAlt" loading="lazy" /></div>
+            </article>
+            <article class="feature-card feature-card--trajectory provider-reveal" style="--reveal-delay: 240ms">
+              <div class="feature-card-copy">
+                <span class="trajectory-feature-kicker" data-i18n="features.trajectoryEyebrow">Session trajectory</span>
+                <h3 data-i18n="features.trajectoryTitle">See how a session unfolded</h3>
+                <p data-i18n="features.trajectoryBody">See the phases a session moved through, then follow separate Input, Agent, and Tools lanes. Timestamps show duration when available; otherwise, the trajectory keeps the observed event order.</p>
+              </div>
+              <div class="trajectory-demo" role="img" aria-label="VibeMeter session trajectory rendered with demo data" data-i18n-aria-label="features.trajectoryAlt">
+                <header class="trajectory-demo-header">
+                  <span><img src="./logos/deepseek.svg" alt="" /><b>DeepSeek Harness</b><small data-i18n="trajectory.demoSession">Refactor source adapter</small></span>
+                  <em data-i18n="trajectory.byTime">By time</em>
+                </header>
+                <div class="trajectory-demo-section">
+                  <div class="trajectory-demo-label"><span data-i18n="trajectory.phaseMap">Phase map</span><small>27 <span data-i18n="trajectory.events">events</span></small></div>
+                  <div class="trajectory-demo-phases" aria-hidden="true"><i class="phase-understand"></i><i class="phase-inspect"></i><i class="phase-plan"></i><i class="phase-edit"></i><i class="phase-verify"></i><i class="phase-fix"></i><i class="phase-verify"></i></div>
+                  <div class="trajectory-demo-lanes">
+                    <div><span data-i18n="trajectory.input">Input</span><p><i class="instant" style="--x:3%"></i><i class="instant" style="--x:58%"></i></p></div>
+                    <div><span>Agent</span><p><i style="--x:3%;--w:53%"></i><i style="--x:59%;--w:37%"></i></p></div>
+                    <div><span data-i18n="trajectory.tools">Tools</span><p><i style="--x:17%;--w:12%"></i><i style="--x:35%;--w:8%"></i><i class="issue" style="--x:63%;--w:9%"></i><i style="--x:79%;--w:15%"></i></p></div>
+                  </div>
+                  <div class="trajectory-demo-axis" aria-hidden="true"><span>0:00</span><span>4:12</span><span>8:24</span><span>12:36</span><span>16:48</span></div>
+                </div>
+                <footer><span data-i18n="trajectory.files">File trajectory</span><span data-i18n="trajectory.git">Git trajectory</span><b data-i18n="trajectory.verified">Verified</b></footer>
+              </div>
             </article>
           </div>
         </div>
@@ -452,7 +478,7 @@
     </footer>
 
     <script defer src="./release-data.js?v=v0.4.0-20260816123024-s2"></script>
-    <script defer src="./site-locales.js?v=9"></script>
+    <script defer src="./site-locales.js?v=10"></script>
     <script defer src="./site.js?v=11"></script>
   </body>
 </html>
