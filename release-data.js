@@ -2,27 +2,61 @@
 window.VibeMeterReleaseData = {
   "schemaVersion": 2,
   "sourceRepo": "RangeKing/vibemeter",
-  "version": "v0.4.1",
-  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.4.1",
-  "publishedAt": "2026-08-16T15:10:50Z",
-  "releaseUpdatedAt": "2026-08-16T15:14:36Z",
+  "version": "v0.4.3",
+  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.4.3",
+  "publishedAt": "2026-08-21T13:53:17Z",
+  "releaseUpdatedAt": "2026-08-21T13:55:39Z",
   "notes": {
     "zh-CN": {
       "source": "localized",
-      "markdown": "VibeMeter 0.4.1 修复了 macOS 安装镜像中的 Finder 布局问题，并把镜像最终化与校验纳入自动发布流程。\n\n### 修复与改进\n\n- 发布 DMG 前自动隐藏 `.background` 与 `.VolumeIcon.icns`，并将其图标位置移出 Finder 窗口，避免内部打包文件出现在安装界面。\n- Apple Silicon 与 Intel 镜像上传前都会重新挂载并校验隐藏标记、Finder 隐藏属性和图标位置；校验失败会直接阻止发布。\n- DMG 布局工具改用隔离的 Python 虚拟环境，避免系统 Python 的包管理策略中断发布。\n\n### 安装说明\n\n- 需要 macOS 14 或更高版本。\n- 下载与你的 Mac 匹配的 Apple Silicon 或 Intel DMG/ZIP。\n- 当前构建采用 ad-hoc 签名，尚未经过 Apple 公证；首次打开时可能需要在“隐私与安全性”中手动允许。"
+      "markdown": "- 修复 Grok 图标，改用 LobeHub 官方 Grok 图标。\n- 安装初始化时自动检测本机已安装的 Agent，未检测到的 Agent 不再显示在数据页右上角筛选器中。\n- 设置页新增数据页 Agent 显示选项，可自动显示已检测 Agent，也可手动管理显示列表。\n- 安装新 Agent 后，可在设置页重新检测并更新数据页 Agent 列表。"
     },
     "en": {
       "source": "localized",
-      "markdown": "VibeMeter 0.4.1 fixes the Finder layout of the macOS installer image and adds DMG finalization and verification to the automated release pipeline.\n\n### Fixes and improvements\n\n- `.background` and `.VolumeIcon.icns` are now hidden and positioned outside the Finder window before each DMG is published, so internal packaging files no longer appear in the installer view.\n- Both Apple Silicon and Intel images are remounted and checked for POSIX hidden flags, Finder invisibility, and off-window icon positions before upload. A failed check blocks the release.\n- DMG layout tooling now runs in an isolated Python virtual environment, preventing system Python package-management policy from interrupting releases.\n\n### Installation\n\n- Requires macOS 14 or later.\n- Download the Apple Silicon or Intel DMG/ZIP that matches your Mac.\n- Builds are ad-hoc signed and are not Apple-notarized yet. macOS may require manual approval in Privacy & Security on first launch."
+      "markdown": "- Fixed the Grok icon by using the official Grok icon from LobeHub.\n- The initial setup now detects the Agents installed on this Mac, and undetected Agents are hidden from the Data page top-right filter.\n- Added Data page Agent display controls in Settings, with automatic detection or a manually managed display list.\n- Added a re-detect action in Settings to update the Data page Agent list after installing a new Agent."
     }
   },
   "assets": {
-    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.1/VibeMeter_0.4.1_macOS_aarch64.dmg",
-    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.1/VibeMeter_v0.4.1_macOS_arm64.zip",
-    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.1/VibeMeter_0.4.1_macOS_x64.dmg",
-    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.1/VibeMeter_v0.4.1_macOS_x64.zip"
+    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.3/VibeMeter_0.4.3_macOS_aarch64.dmg",
+    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.3/VibeMeter_v0.4.3_macOS_arm64.zip",
+    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.3/VibeMeter_0.4.3_macOS_x64.dmg",
+    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.3/VibeMeter_v0.4.3_macOS_x64.zip"
   },
   "releases": [
+    {
+      "sourceRepo": "RangeKing/vibemeter",
+      "version": "v0.4.3",
+      "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.4.3",
+      "publishedAt": "2026-08-21T13:53:17Z",
+      "releaseUpdatedAt": "2026-08-21T13:55:39Z",
+      "notes": {
+        "zh-CN": {
+          "source": "localized",
+          "markdown": "- 修复 Grok 图标，改用 LobeHub 官方 Grok 图标。\n- 安装初始化时自动检测本机已安装的 Agent，未检测到的 Agent 不再显示在数据页右上角筛选器中。\n- 设置页新增数据页 Agent 显示选项，可自动显示已检测 Agent，也可手动管理显示列表。\n- 安装新 Agent 后，可在设置页重新检测并更新数据页 Agent 列表。"
+        },
+        "en": {
+          "source": "localized",
+          "markdown": "- Fixed the Grok icon by using the official Grok icon from LobeHub.\n- The initial setup now detects the Agents installed on this Mac, and undetected Agents are hidden from the Data page top-right filter.\n- Added Data page Agent display controls in Settings, with automatic detection or a manually managed display list.\n- Added a re-detect action in Settings to update the Data page Agent list after installing a new Agent."
+        }
+      }
+    },
+    {
+      "sourceRepo": "RangeKing/vibemeter",
+      "version": "v0.4.2",
+      "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.4.2",
+      "publishedAt": "2026-08-21T08:07:00Z",
+      "releaseUpdatedAt": "2026-08-21T11:14:10Z",
+      "notes": {
+        "zh-CN": {
+          "source": "localized",
+          "markdown": "### 新增\n- 支持 Grok Build：\n  - 索引本地历史会话与实时状态\n  - 支持项目、标题、模型、会话 ID 和用量信息\n  - 支持工具调用、错误状态、完成状态与 Notch 展示\n  - 保持本地优先与隐私安全，不保存提示词、代码或原始工具输出\n- 新增官方 API 价格获取脚本，覆盖 OpenAI、Anthropic、DeepSeek、Kimi、Z.AI、xAI 和 Cursor。\n- 每次发版自动从官方页面刷新 API 价格，并记录来源、抓取时间和页面哈希，避免价格静默过期。\n### 修复\n- 修复数据页切换 agent 后 API 等价成本估算数字不更新的问题。\n- 成本估算改为基于当前筛选结果重新聚合。\n- 对缺少官方 cache-write 价格或非 USD 价格的模型采取保守处理，不猜测汇率或价格。"
+        },
+        "en": {
+          "source": "localized",
+          "markdown": "### Added\n- Added Grok Build support:\n  - Indexes local historical sessions and live status\n  - Supports projects, titles, models, session IDs, and usage data\n  - Supports tool calls, errors, completion states, and Notch display\n  - Preserves VibeMeter’s local-first and privacy-safe design\n- Added an official API pricing fetcher covering OpenAI, Anthropic, DeepSeek, Kimi, Z.AI, xAI, and Cursor.\n- API prices are refreshed automatically during every release, with source URLs, fetch timestamps, and page hashes recorded for auditability.\n### Fixed\n- Fixed the Data page API-equivalent cost estimate not updating when switching agents.\n- Cost estimates are now recalculated from the currently selected agents.\n- Models without official cache-write prices or with non-USD pricing are handled conservatively without guessed rates or exchange conversions."
+        }
+      }
+    },
     {
       "sourceRepo": "RangeKing/vibemeter",
       "version": "v0.4.1",
