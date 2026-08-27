@@ -2,27 +2,44 @@
 window.VibeMeterReleaseData = {
   "schemaVersion": 2,
   "sourceRepo": "RangeKing/vibemeter",
-  "version": "v0.4.3",
-  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.4.3",
-  "publishedAt": "2026-08-21T13:53:17Z",
-  "releaseUpdatedAt": "2026-08-21T13:55:39Z",
+  "version": "v0.5.0",
+  "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.5.0",
+  "publishedAt": "2026-08-27T13:49:58Z",
+  "releaseUpdatedAt": "2026-08-27T13:51:36Z",
   "notes": {
     "zh-CN": {
       "source": "localized",
-      "markdown": "- 修复 Grok 图标，改用 LobeHub 官方 Grok 图标。\n- 安装初始化时自动检测本机已安装的 Agent，未检测到的 Agent 不再显示在数据页右上角筛选器中。\n- 设置页新增数据页 Agent 显示选项，可自动显示已检测 Agent，也可手动管理显示列表。\n- 安装新 Agent 后，可在设置页重新检测并更新数据页 Agent 列表。"
+      "markdown": "VibeMeter 0.5.0 让多项目工作更容易整理，也让单次会话携带的上下文变得可回看。\n\n### 新增\n\n- **项目视图与项目组**：Sessions 新增项目视图，可按最近活动、会话数、时长、Token、成本、文件、代码行、工具和错误排序；设置中可以把多个本机项目归入可命名、可重命名的项目组，并直接查看组内会话汇总。\n- **会话上下文浏览器**：会话详情新增“上下文”页，以只读方式展示上下文 Token 结构、分类统计和可读取内容。系统提示词、工具定义、用户消息、注入内容、助手消息、工具调用与工具结果分别呈现；数据会标记为已观测、估算或未记录，文字预览按需脱敏并限制长度。\n- **更顺手的项目选择**：设置中的项目列表支持 Shift 连选与 Command/Ctrl 多选，创建项目组时可以更快组织相关项目。\n\n### 修复与改进\n\n- 修复 Codex 本机数据库并发读取可能造成的卡住问题，并将实时读取工作移出主运行线程。\n- 修复 Claude 会话结束后仍残留在 Notch 中的问题。\n- 修复项目组设置、CACHE 人物图显示和上下文结构图的对齐细节。\n- 更新官方模型价格目录，并补充 GLM-5-3 Flash 的价格信息。\n\n上下文浏览器的交互方向参考了 [dsh-context](https://github.com/bowenliang123/dsh-context)，感谢 [bowenliang123](https://github.com/bowenliang123) 的开源工作；VibeMeter 使用独立的数据模型与实现。"
     },
     "en": {
       "source": "localized",
-      "markdown": "- Fixed the Grok icon by using the official Grok icon from LobeHub.\n- The initial setup now detects the Agents installed on this Mac, and undetected Agents are hidden from the Data page top-right filter.\n- Added Data page Agent display controls in Settings, with automatic detection or a manually managed display list.\n- Added a re-detect action in Settings to update the Data page Agent list after installing a new Agent."
+      "markdown": "VibeMeter 0.5.0 makes multi-project work easier to organize and gives each session a clearer, reviewable view of the context it carried.\n\n### New\n\n- **Projects view and project groups**: Sessions now opens with a project view that can be sorted by recent activity, session count, duration, tokens, cost, files, lines, tools, or errors. Settings can group multiple local projects under a name, rename groups, and show the group’s combined session summary.\n- **Session Context browser**: Session details now include a read-only Context view with context-token structure, category totals, and available content. System prompts, tool schemas, user messages, injected context, assistant messages, tool use, and tool results are shown as separate categories; coverage is labeled Observed, Estimated, or Not recorded, while text previews are sanitized and bounded on demand.\n- **Faster project selection**: The project list in Settings supports Shift-range selection and Command/Ctrl multi-selection for quicker group creation.\n\n### Fixes and improvements\n\n- Prevented Codex local database reads from hanging under concurrent access, and moved blocking live reads off the main runtime thread.\n- Fixed stale Claude sessions remaining visible in the Notch after completion.\n- Refined project-group settings, the CACHE character artwork, and Context structure alignment.\n- Refreshed the official model price catalog and added pricing for GLM-5-3 Flash.\n\nThe Context browser’s interaction direction was informed by [dsh-context](https://github.com/bowenliang123/dsh-context). Thanks to [bowenliang123](https://github.com/bowenliang123) for the open-source work; VibeMeter uses an independent data model and implementation."
     }
   },
   "assets": {
-    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.3/VibeMeter_0.4.3_macOS_aarch64.dmg",
-    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.3/VibeMeter_v0.4.3_macOS_arm64.zip",
-    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.3/VibeMeter_0.4.3_macOS_x64.dmg",
-    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.4.3/VibeMeter_v0.4.3_macOS_x64.zip"
+    "arm64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.5.0/VibeMeter_0.5.0_macOS_aarch64.dmg",
+    "arm64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.5.0/VibeMeter_v0.5.0_macOS_arm64.zip",
+    "x64.dmg": "https://github.com/RangeKing/vibemeter/releases/download/v0.5.0/VibeMeter_0.5.0_macOS_x64.dmg",
+    "x64.zip": "https://github.com/RangeKing/vibemeter/releases/download/v0.5.0/VibeMeter_v0.5.0_macOS_x64.zip"
   },
   "releases": [
+    {
+      "sourceRepo": "RangeKing/vibemeter",
+      "version": "v0.5.0",
+      "releaseUrl": "https://github.com/RangeKing/vibemeter/releases/tag/v0.5.0",
+      "publishedAt": "2026-08-27T13:49:58Z",
+      "releaseUpdatedAt": "2026-08-27T13:51:36Z",
+      "notes": {
+        "zh-CN": {
+          "source": "localized",
+          "markdown": "VibeMeter 0.5.0 让多项目工作更容易整理，也让单次会话携带的上下文变得可回看。\n\n### 新增\n\n- **项目视图与项目组**：Sessions 新增项目视图，可按最近活动、会话数、时长、Token、成本、文件、代码行、工具和错误排序；设置中可以把多个本机项目归入可命名、可重命名的项目组，并直接查看组内会话汇总。\n- **会话上下文浏览器**：会话详情新增“上下文”页，以只读方式展示上下文 Token 结构、分类统计和可读取内容。系统提示词、工具定义、用户消息、注入内容、助手消息、工具调用与工具结果分别呈现；数据会标记为已观测、估算或未记录，文字预览按需脱敏并限制长度。\n- **更顺手的项目选择**：设置中的项目列表支持 Shift 连选与 Command/Ctrl 多选，创建项目组时可以更快组织相关项目。\n\n### 修复与改进\n\n- 修复 Codex 本机数据库并发读取可能造成的卡住问题，并将实时读取工作移出主运行线程。\n- 修复 Claude 会话结束后仍残留在 Notch 中的问题。\n- 修复项目组设置、CACHE 人物图显示和上下文结构图的对齐细节。\n- 更新官方模型价格目录，并补充 GLM-5-3 Flash 的价格信息。\n\n上下文浏览器的交互方向参考了 [dsh-context](https://github.com/bowenliang123/dsh-context)，感谢 [bowenliang123](https://github.com/bowenliang123) 的开源工作；VibeMeter 使用独立的数据模型与实现。"
+        },
+        "en": {
+          "source": "localized",
+          "markdown": "VibeMeter 0.5.0 makes multi-project work easier to organize and gives each session a clearer, reviewable view of the context it carried.\n\n### New\n\n- **Projects view and project groups**: Sessions now opens with a project view that can be sorted by recent activity, session count, duration, tokens, cost, files, lines, tools, or errors. Settings can group multiple local projects under a name, rename groups, and show the group’s combined session summary.\n- **Session Context browser**: Session details now include a read-only Context view with context-token structure, category totals, and available content. System prompts, tool schemas, user messages, injected context, assistant messages, tool use, and tool results are shown as separate categories; coverage is labeled Observed, Estimated, or Not recorded, while text previews are sanitized and bounded on demand.\n- **Faster project selection**: The project list in Settings supports Shift-range selection and Command/Ctrl multi-selection for quicker group creation.\n\n### Fixes and improvements\n\n- Prevented Codex local database reads from hanging under concurrent access, and moved blocking live reads off the main runtime thread.\n- Fixed stale Claude sessions remaining visible in the Notch after completion.\n- Refined project-group settings, the CACHE character artwork, and Context structure alignment.\n- Refreshed the official model price catalog and added pricing for GLM-5-3 Flash.\n\nThe Context browser’s interaction direction was informed by [dsh-context](https://github.com/bowenliang123/dsh-context). Thanks to [bowenliang123](https://github.com/bowenliang123) for the open-source work; VibeMeter uses an independent data model and implementation."
+        }
+      }
+    },
     {
       "sourceRepo": "RangeKing/vibemeter",
       "version": "v0.4.3",
